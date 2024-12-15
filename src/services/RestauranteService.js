@@ -45,6 +45,34 @@ class RestauranteService {
       throw new Error("Erro ao criar restaurante: " + error.message);
     }
   }
+  async updateRestauranteEndereco(id, restauranteData) {
+    if (!id || isNaN(id)) {
+      throw new Error("ID inválido.");
+    }
+
+    const dadosRestaurante = await RestauranteRepository.findById(id);
+    if (!dadosRestaurante) {
+      throw new Error("Restaurante não encontrado.");
+    }
+
+    const endereco = restauranteData.endereco;
+    if (
+      !endereco ||
+      !endereco.rua ||
+      !endereco.bairro ||
+      !endereco.cidade ||
+      !endereco.estado
+    ) {
+      throw new Error(
+        "Todos os campos de endereço (rua, bairro, cidade, estado) são obrigatórios."
+      );
+    }
+
+    return await RestauranteRepository.updateRestauranteEndereco(
+      id,
+      restauranteData
+    );
+  }
 
   async updateRestaurante(id, restauranteData) {
     try {
@@ -79,7 +107,7 @@ class RestauranteService {
       );
       if (!restaurante) {
         throw new Error(
-          "Restaurante não encontrado ou não foi possível atualizar."
+          "Dados do Restaurante não foi alterado não foi possível atualizar."
         );
       }
       return restaurante;

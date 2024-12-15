@@ -1,5 +1,6 @@
 import { DataTypes } from "sequelize";
 import sequelize from "../database/sequelize.js";
+import Endereco from "./EnderecoModel.js";
 
 const Restaurante = sequelize.define(
   "Restaurante",
@@ -30,5 +31,7 @@ const Restaurante = sequelize.define(
     timestamps: false,
   }
 );
+
+Restaurante.hasOne(Endereco, { foreignKey: "restaurante_id", as: "endereco" });
 
 export default Restaurante;
