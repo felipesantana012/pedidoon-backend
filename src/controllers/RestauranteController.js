@@ -32,6 +32,33 @@ class RestauranteController {
     }
   }
 
+  async updateRestauranteEndereco(req, res) {
+    const { id } = req.params;
+    const restauranteData = req.body;
+
+    try {
+      const restaurante = await RestauranteService.updateRestauranteEndereco(
+        id,
+        restauranteData
+      );
+      res.status(200).json({
+        message: "Endereço atualizado com sucesso.",
+        data: restaurante,
+      });
+    } catch (error) {
+      if (error.message.includes("não encontrado")) {
+        res.status(404).json({ error: error.message });
+      } else if (
+        error.message.includes("obrigatório") ||
+        error.message.includes("inválido")
+      ) {
+        res.status(400).json({ error: error.message });
+      } else {
+        res.status(500).json({ error: "Erro interno no servidor." });
+      }
+    }
+  }
+
   async updateRestaurante(req, res) {
     const { id } = req.params;
     const restauranteData = req.body;
