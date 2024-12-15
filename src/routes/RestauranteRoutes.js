@@ -8,8 +8,6 @@ routes.get("/:id", RestauranteController.getRestauranteById);
 
 routes.post("/", RestauranteController.createRestaurante);
 
-routes.put("/:id", RestauranteController.updateRestaurante);
-
 routes.put("/:id/endereco", RestauranteController.updateRestauranteEndereco);
 
 routes.delete("/:id", RestauranteController.deleteRestaurante);
