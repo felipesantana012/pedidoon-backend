@@ -8,7 +8,6 @@ class RestauranteRepository {
         {
           model: Endereco,
           as: "endereco",
-          attributes: ["rua", "bairro", "cidade", "estado"],
         },
       ],
     });
@@ -24,7 +23,6 @@ class RestauranteRepository {
         {
           model: Endereco,
           as: "endereco",
-          attributes: ["rua", "bairro", "cidade", "estado"],
         },
       ],
     });
@@ -50,31 +48,27 @@ class RestauranteRepository {
     });
   }
 
-  async updateRestauranteEndereco(id, restaurante) {
-    const { endereco } = restaurante;
-
-    if (endereco) {
-      await Endereco.update(endereco, {
-        where: { restaurante_id: id },
-      });
-    }
-
-    return await RestauranteModel.findByPk(id, {
-      include: [
-        {
-          model: Endereco,
-          as: "endereco",
-          attributes: ["rua", "bairro", "cidade", "estado"],
-        },
-      ],
-    });
-  }
-
   async delete(id) {
     const deleted = await RestauranteModel.destroy({
       where: { id },
     });
     return deleted;
+  }
+
+  async updateRestauranteEndereco(id, endereco) {
+    if (endereco) {
+      const [updated] = await Endereco.update(endereco, {
+        where: { restaurante_id: id },
+      });
+
+      if (updated > 0) {
+        return await Endereco.findOne({
+          where: { restaurante_id: id },
+        });
+      }
+    }
+
+    return null;
   }
 }
 

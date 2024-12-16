@@ -1,9 +1,12 @@
+import e from "express";
+
 const messages = {
   NOT_FOUND: "Recurso não encontrado.",
   INVALID_ID: "ID inválido.",
   MISSING_FIELDS: "Campos obrigatórios faltando: ",
   DUPLICATE_EMAIL: "Email já cadastrado. Tente outro email.",
   PASSWORD_TOO_SHORT: "A senha deve ter no mínimo 4 caracteres.",
+  REQUEST_BODY_INVALID: "Corpo da requisição inválido.",
   DEFAULT: "Erro ao processar a solicitação.",
 };
 
@@ -27,7 +30,8 @@ export function statusError(error) {
     error.message.includes(messages.MISSING_FIELDS) ||
     error.message.includes(messages.INVALID_ID) ||
     error.message.includes(messages.PASSWORD_TOO_SHORT) ||
-    error.message.includes(messages.DUPLICATE_EMAIL)
+    error.message.includes(messages.DUPLICATE_EMAIL) ||
+    error.message.includes(messages.REQUEST_BODY_INVALID)
   ) {
     return 400;
   } else {
