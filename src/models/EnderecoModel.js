@@ -34,6 +34,11 @@ const Endereco = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    linkmaps: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      defaultValue: "https://www.google.com/maps",
+    },
   },
   {
     tableName: "endereco",

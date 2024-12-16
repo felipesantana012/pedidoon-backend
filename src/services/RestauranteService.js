@@ -27,6 +27,9 @@ class RestauranteService {
 
   async createRestaurante(restauranteData) {
     try {
+      if (!restauranteData) {
+        throw new Error(gerarMenssagemError("REQUEST_BODY_INVALID"));
+      }
       validarCampos(restauranteData, ["email", "senha", "endereco"]);
       validarCampos(restauranteData.endereco, [
         "rua",
@@ -71,6 +74,10 @@ class RestauranteService {
 
   async updateRestauranteEndereco(id, enderecoData) {
     try {
+      if (!enderecoData) {
+        throw new Error(gerarMenssagemError("REQUEST_BODY_INVALID"));
+      }
+
       if (!id || isNaN(id)) {
         throw new Error(gerarMenssagemError("INVALID_ID"));
       }
@@ -80,7 +87,13 @@ class RestauranteService {
         throw new Error(gerarMenssagemError("NOT_FOUND"));
       }
 
-      validarCampos(enderecoData, ["rua", "bairro", "cidade", "estado"]);
+      validarCampos(enderecoData, [
+        "rua",
+        "bairro",
+        "cidade",
+        "estado",
+        "linkmaps",
+      ]);
 
       return await RestauranteRepository.updateRestauranteEndereco(
         id,
