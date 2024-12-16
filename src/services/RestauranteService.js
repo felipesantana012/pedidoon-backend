@@ -30,13 +30,22 @@ class RestauranteService {
       if (!restauranteData) {
         throw new Error(gerarMenssagemError("REQUEST_BODY_INVALID"));
       }
-      validarCampos(restauranteData, ["email", "senha", "endereco"]);
+      validarCampos(restauranteData, [
+        "email",
+        "senha",
+        "nomeRestaurante",
+        "nomeProprietario",
+        "endereco",
+        "rede_sociais",
+      ]);
       validarCampos(restauranteData.endereco, [
         "rua",
         "bairro",
         "cidade",
         "estado",
       ]);
+
+      validarCampos(restauranteData.rede_sociais, ["whatsapp"]);
 
       if (restauranteData.senha.length < 4) {
         throw new Error(gerarMenssagemError("PASSWORD_TOO_SHORT"));
@@ -98,6 +107,32 @@ class RestauranteService {
       return await RestauranteRepository.updateRestauranteEndereco(
         id,
         enderecoData
+      );
+    } catch (error) {
+      throw new Error(gerarMenssagemError("DEFAULT", error.message));
+    }
+  }
+
+  async updateRestauranteRedeSocial(id, redeSocialData) {
+    try {
+      if (!redeSocialData) {
+        throw new Error(gerarMenssagemError("REQUEST_BODY_INVALID"));
+      }
+
+      if (!id || isNaN(id)) {
+        throw new Error(gerarMenssagemError("INVALID_ID"));
+      }
+
+      const dadosRestaurante = await RestauranteRepository.findById(id);
+      if (!dadosRestaurante) {
+        throw new Error(gerarMenssagemError("NOT_FOUND"));
+      }
+
+      validarCampos(redeSocialData, ["whatsapp"]);
+
+      return await RestauranteRepository.updateRestauranteRedeSocial(
+        id,
+        redeSocialData
       );
     } catch (error) {
       throw new Error(gerarMenssagemError("DEFAULT", error.message));

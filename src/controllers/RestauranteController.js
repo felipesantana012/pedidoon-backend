@@ -33,6 +33,16 @@ class RestauranteController {
     }
   }
 
+  async deleteRestaurante(req, res) {
+    const { id } = req.params;
+    try {
+      await RestauranteService.deleteRestaurante(id);
+      res.status(200).json({ message: "Restaurante deletado com sucesso." });
+    } catch (error) {
+      res.status(statusError(error)).json({ error: error.message });
+    }
+  }
+
   async updateRestauranteEndereco(req, res) {
     const { id } = req.params;
     const { endereco } = req.body;
@@ -50,11 +60,18 @@ class RestauranteController {
     }
   }
 
-  async deleteRestaurante(req, res) {
+  async updateRestauranteRedeSocial(req, res) {
     const { id } = req.params;
+    const { rede_sociais } = req.body;
+
     try {
-      await RestauranteService.deleteRestaurante(id);
-      res.status(200).json({ message: "Restaurante deletado com sucesso." });
+      const restauranteAtualizado =
+        await RestauranteService.updateRestauranteRedeSocial(id, rede_sociais);
+
+      res.status(200).json({
+        message: "Rede social atualizada com sucesso.",
+        data: restauranteAtualizado,
+      });
     } catch (error) {
       res.status(statusError(error)).json({ error: error.message });
     }
