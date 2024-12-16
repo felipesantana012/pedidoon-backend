@@ -4,13 +4,9 @@ import sequelize from "../database/sequelize.js";
 const Endereco = sequelize.define(
   "Endereco",
   {
-    id: {
-      type: DataTypes.INTEGER,
-      autoIncrement: true,
-      primaryKey: true,
-    },
     restaurante_id: {
       type: DataTypes.INTEGER,
+      primaryKey: true,
       allowNull: false,
       references: {
         model: "Restaurante",
