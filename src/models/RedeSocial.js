@@ -1,8 +1,8 @@
 import { DataTypes } from "sequelize";
 import sequelize from "../database/sequelize.js";
 
-const Endereco = sequelize.define(
-  "Endereco",
+const RedeSocial = sequelize.define(
+  "RedeSocial",
   {
     restaurante_id: {
       type: DataTypes.INTEGER,
@@ -14,32 +14,30 @@ const Endereco = sequelize.define(
       },
       onDelete: "CASCADE",
     },
-    rua: {
+    facebook: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      defaultValue: "https://www.facebook.com",
+    },
+    whatsapp: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    bairro: {
+    tiktok: {
       type: DataTypes.STRING,
       allowNull: false,
+      defaultValue: "https://www.tiktok.com",
     },
-    cidade: {
+    instagram: {
       type: DataTypes.STRING,
       allowNull: false,
-    },
-    estado: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    linkmaps: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      defaultValue: "https://www.google.com/maps",
+      defaultValue: "https://www.instagram.com",
     },
   },
   {
-    tableName: "endereco",
+    tableName: "rede_sociais",
     timestamps: false,
   }
 );
 
-export default Endereco;
+export default RedeSocial;

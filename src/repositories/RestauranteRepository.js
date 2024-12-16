@@ -1,4 +1,5 @@
 import Endereco from "../models/EnderecoModel.js";
+import RedeSocial from "../models/RedeSocial.js";
 import RestauranteModel from "../models/RestauranteModel.js";
 
 class RestauranteRepository {
@@ -8,6 +9,10 @@ class RestauranteRepository {
         {
           model: Endereco,
           as: "endereco",
+        },
+        {
+          model: RedeSocial,
+          as: "rede_sociais",
         },
       ],
     });
@@ -24,6 +29,10 @@ class RestauranteRepository {
           model: Endereco,
           as: "endereco",
         },
+        {
+          model: RedeSocial,
+          as: "rede_sociais",
+        },
       ],
     });
   }
@@ -35,6 +44,10 @@ class RestauranteRepository {
           model: Endereco,
           as: "endereco",
         },
+        {
+          model: RedeSocial,
+          as: "rede_sociais",
+        },
       ],
     });
 
@@ -43,6 +56,10 @@ class RestauranteRepository {
         {
           model: Endereco,
           as: "endereco",
+        },
+        {
+          model: RedeSocial,
+          as: "rede_sociais",
         },
       ],
     });
@@ -63,6 +80,22 @@ class RestauranteRepository {
 
       if (updated > 0) {
         return await Endereco.findOne({
+          where: { restaurante_id: id },
+        });
+      }
+    }
+
+    return null;
+  }
+
+  async updateRestauranteRedeSocial(id, redeSocial) {
+    if (redeSocial) {
+      const [updated] = await RedeSocial.update(redeSocial, {
+        where: { restaurante_id: id },
+      });
+
+      if (updated > 0) {
+        return await RedeSocial.findOne({
           where: { restaurante_id: id },
         });
       }
