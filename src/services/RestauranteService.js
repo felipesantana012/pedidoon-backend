@@ -33,8 +33,8 @@ class RestauranteService {
       validarCampos(restauranteData, [
         "email",
         "senha",
-        "nomeRestaurante",
-        "nomeProprietario",
+        "nome_restaurante",
+        "nome_proprietario",
         "endereco",
         "rede_sociais",
       ]);

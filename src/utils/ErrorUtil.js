@@ -1,5 +1,3 @@
-import e from "express";
-
 const messages = {
   NOT_FOUND: "Recurso não encontrado.",
   INVALID_ID: "ID inválido.",
@@ -11,7 +9,7 @@ const messages = {
 };
 
 export function gerarMenssagemError(type, details = "") {
-  return `${messages[type] || messages.DEFAULT} ${details}`;
+  return `${messages[type]} ${details}`;
 }
 
 export function validarCampos(fields, requiredFields) {
