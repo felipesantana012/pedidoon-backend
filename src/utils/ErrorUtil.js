@@ -1,5 +1,5 @@
 const messages = {
-  NOT_FOUND: "Recurso não encontrado.",
+  NOT_FOUND: "Recurso ou id não encontrado.",
   INVALID_ID: "ID inválido.",
   MISSING_FIELDS: "Campos obrigatórios faltando: ",
   DUPLICATE_EMAIL: "Email já cadastrado. Tente outro email.",
