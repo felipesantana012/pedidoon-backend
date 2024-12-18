@@ -26,11 +26,11 @@ const Restaurante = sequelize.define(
         len: [4, 100],
       },
     },
-    nomeRestaurante: {
+    nome_restaurante: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    nomeProprietario: {
+    nome_proprietario: {
       type: DataTypes.STRING,
       allowNull: false,
     },
