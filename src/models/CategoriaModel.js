@@ -6,8 +6,8 @@ const Categoria = sequelize.define(
   {
     id: {
       type: DataTypes.INTEGER,
-      autoIncrement: true,
       primaryKey: true,
+      autoIncrement: true,
     },
 
     restaurante_id: {

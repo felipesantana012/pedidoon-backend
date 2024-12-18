@@ -1,3 +1,4 @@
+import Categoria from "../models/CategoriaModel.js";
 import Endereco from "../models/EnderecoModel.js";
 import RedeSocial from "../models/RedeSocial.js";
 import RestauranteModel from "../models/RestauranteModel.js";
@@ -13,6 +14,10 @@ class RestauranteRepository {
         {
           model: RedeSocial,
           as: "rede_sociais",
+        },
+        {
+          model: Categoria,
+          as: "categorias",
         },
       ],
     });
@@ -33,6 +38,10 @@ class RestauranteRepository {
           model: RedeSocial,
           as: "rede_sociais",
         },
+        {
+          model: Categoria,
+          as: "categorias",
+        },
       ],
     });
   }
@@ -48,6 +57,10 @@ class RestauranteRepository {
           model: RedeSocial,
           as: "rede_sociais",
         },
+        {
+          model: Categoria,
+          as: "categorias",
+        },
       ],
     });
 
@@ -60,6 +73,10 @@ class RestauranteRepository {
         {
           model: RedeSocial,
           as: "rede_sociais",
+        },
+        {
+          model: Categoria,
+          as: "categorias",
         },
       ],
     });

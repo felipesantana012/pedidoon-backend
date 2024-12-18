@@ -20,6 +20,19 @@ class CategoriaController {
       res.status(statusError(error)).json({ error: error.message });
     }
   }
+
+  async createCategoria(req, res) {
+    const { restaurante_id } = req.params;
+    const categoria = req.body;
+    categoria.restaurante_id = restaurante_id;
+
+    try {
+      const novaCategoria = await CategoriaService.createCategoria(categoria);
+      res.status(201).json(novaCategoria);
+    } catch (error) {
+      res.status(statusError(error)).json({ error: error.message });
+    }
+  }
 }
 
 export default new CategoriaController();

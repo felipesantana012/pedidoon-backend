@@ -1,5 +1,6 @@
 import CategoriaRepository from "../repositories/CategoriaRepository.js";
-import { gerarMenssagemError } from "../utils/ErrorUtil.js";
+import { gerarMenssagemError, validarCampos } from "../utils/ErrorUtil.js";
+import RestauranteService from "./RestauranteService.js";
 
 class CategoriaService {
   async getAllCategorias() {
@@ -20,6 +21,26 @@ class CategoriaService {
         throw new Error(gerarMenssagemError("NOT_FOUND"));
       }
       return categoria;
+    } catch (error) {
+      throw new Error(gerarMenssagemError("DEFAULT", error.message));
+    }
+  }
+
+  async createCategoria(categoria) {
+    try {
+      if (!categoria) {
+        throw new Error(gerarMenssagemError("REQUEST_BODY_INVALID"));
+      }
+      const restaurante = await RestauranteService.getRestauranteById(
+        categoria.restaurante_id
+      );
+
+      if (!restaurante) {
+        return res.status(404).json({ error: "Restaurante não encontrado." });
+      }
+
+      validarCampos(categoria, ["nome"]);
+      return await CategoriaRepository.createCategoria(categoria);
     } catch (error) {
       throw new Error(gerarMenssagemError("DEFAULT", error.message));
     }
