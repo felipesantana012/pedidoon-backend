@@ -1,5 +1,6 @@
 import { DataTypes } from "sequelize";
 import sequelize from "../database/sequelize.js";
+import Itens from "./ItensModel.js";
 
 const Categoria = sequelize.define(
   "Categoria",
@@ -29,5 +30,7 @@ const Categoria = sequelize.define(
     timestamps: false,
   }
 );
+
+Categoria.hasMany(Itens, { foreignKey: "categoria_id", as: "itens" });
 
 export default Categoria;
