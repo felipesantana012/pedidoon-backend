@@ -1,9 +1,15 @@
 import Categoria from "../models/CategoriaModel.js";
-
+import Itens from "../models/ItensModel.js";
 class CategoriaRepository {
   async findAllCategorias(restaurante_id) {
     return await Categoria.findAll({
       where: { restaurante_id },
+      include: [
+        {
+          model: Itens,
+          as: "itens",
+        },
+      ],
     });
   }
 
@@ -13,6 +19,12 @@ class CategoriaRepository {
         id,
         restaurante_id,
       },
+      include: [
+        {
+          model: Itens,
+          as: "itens",
+        },
+      ],
     });
   }
 

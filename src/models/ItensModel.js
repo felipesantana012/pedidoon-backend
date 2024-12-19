@@ -1,4 +1,4 @@
-import sequelize from "../database/sequelize";
+import sequelize from "../database/sequelize.js";
 
 const Itens = sequelize.define(
   "Itens",
@@ -40,10 +40,12 @@ const Itens = sequelize.define(
     promocao_dia: {
       type: sequelize.Sequelize.BOOLEAN,
       allowNull: false,
+      defaultValue: false,
     },
     disponivel: {
       type: sequelize.Sequelize.BOOLEAN,
       allowNull: false,
+      defaultValue: true,
     },
   },
   {
