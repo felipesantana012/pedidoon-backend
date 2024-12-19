@@ -5,6 +5,6 @@ const routes = new Router();
 
 routes.use("/restaurantes", RestauranteRoutes);
 
-routes.use("/categorias", CategoriaRoutes);
+routes.use("/", CategoriaRoutes);
 
 export default routes;

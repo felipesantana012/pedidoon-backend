@@ -2,10 +2,29 @@ import { Router } from "express";
 import CategoriaController from "../controllers/CategoriaController.js";
 const routes = new Router();
 
-routes.get("/:restaurante_id", CategoriaController.getAllCategorias);
+routes.get(
+  "/restaurantes/:restaurante_id/categorias",
+  CategoriaController.getAllCategorias
+);
 
-routes.get("/:restaurante_id/:id", CategoriaController.getByIdCategoria);
+routes.get(
+  "/restaurantes/:restaurante_id/categorias/:id",
+  CategoriaController.getByIdCategoria
+);
 
-routes.post("/:restaurante_id", CategoriaController.createCategoria);
+routes.post(
+  "/restaurantes/:restaurante_id/categorias",
+  CategoriaController.createCategoria
+);
+
+routes.put(
+  "/restaurantes/:restaurante_id/categorias/:id",
+  CategoriaController.updateCategoria
+);
+
+routes.delete(
+  "/restaurantes/:restaurante_id/categorias/:id",
+  CategoriaController.deleteCategoria
+);
 
 export default routes;
