@@ -4,7 +4,16 @@ import { gerarMenssagemError, validarCampos } from "../utils/ErrorUtil.js";
 class ItensService {
   async getAllItens(categoria_id) {
     try {
-      const itens = await ItensRepository.findAll(categoria_id);
+      const itens = await ItensRepository.findAllItens(categoria_id);
+      return itens;
+    } catch (error) {
+      throw new Error(gerarMenssagemError("DEFAULT", error.message));
+    }
+  }
+
+  async getAllItensDisponiveis(categoria_id) {
+    try {
+      const itens = await ItensRepository.findAllItensDisponiveis(categoria_id);
       return itens;
     } catch (error) {
       throw new Error(gerarMenssagemError("DEFAULT", error.message));
@@ -16,7 +25,7 @@ class ItensService {
       if (!id || isNaN(id) || !categoria_id || isNaN(categoria_id)) {
         throw new Error(gerarMenssagemError("INVALID_ID"));
       }
-      const item = await ItensRepository.findById(id, categoria_id);
+      const item = await ItensRepository.findByIdItem(id, categoria_id);
       if (!item) {
         throw new Error(gerarMenssagemError("NOT_FOUND"));
       }

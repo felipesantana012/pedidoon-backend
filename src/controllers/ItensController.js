@@ -11,6 +11,17 @@ class ItensController {
     }
   }
 
+  async getAllItensDisponiveis(req, res) {
+    try {
+      const itens = await ItensService.getAllItensDisponiveis(
+        req.params.categoria_id
+      );
+      return res.status(200).json(itens);
+    } catch (error) {
+      return res.status(statusError(error)).json({ error: error.message });
+    }
+  }
+
   async getByIdItem(req, res) {
     try {
       const item = await ItensService.getByIdItem(

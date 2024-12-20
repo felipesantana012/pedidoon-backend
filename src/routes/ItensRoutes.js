@@ -6,6 +6,10 @@ routes.get(
   "/restaurantes/:restaurante_id/categorias/:categoria_id/itens",
   ItensController.getAllItens
 );
+routes.get(
+  "/restaurantes/:restaurante_id/categorias/:categoria_id/itens/disponiveis",
+  ItensController.getAllItensDisponiveis
+);
 
 routes.get(
   "/restaurantes/:restaurante_id/categorias/:categoria_id/itens/:id",

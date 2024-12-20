@@ -1,13 +1,19 @@
 import Itens from "../models/ItensModel.js";
 
 class ItensRepository {
-  async findAll(categoria_id) {
+  async findAllItens(categoria_id) {
     return await Itens.findAll({
       where: { categoria_id },
     });
   }
 
-  async findById(id, categoria_id) {
+  async findAllItensDisponiveis(categoria_id) {
+    return await Itens.findAll({
+      where: { categoria_id, disponivel: true },
+    });
+  }
+
+  async findByIdItem(id, categoria_id) {
     return await Itens.findOne({
       where: {
         id,
