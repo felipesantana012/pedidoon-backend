@@ -75,6 +75,10 @@ class CategoriaService {
         dadosAtualizacao
       );
 
+      if (!categoriaAtualizada) {
+        throw new Error(gerarMenssagemError("UPDATE_FAILED"));
+      }
+
       return categoriaAtualizada;
     } catch (error) {
       throw new Error(gerarMenssagemError("DEFAULT", error.message));

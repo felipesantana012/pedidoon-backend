@@ -28,6 +28,31 @@ class ItensRepository {
       categoria_id,
     });
   }
+
+  async updateItem(id, categoria_id, dadosItem) {
+    if (dadosItem) {
+      const [linhasAfetadas] = await Itens.update(dadosItem, {
+        where: {
+          id,
+          categoria_id,
+        },
+      });
+
+      if (linhasAfetadas > 0) {
+        return await this.findByIdItem(id, categoria_id);
+      }
+    }
+    return null;
+  }
+
+  async deleteItem(id, categoria_id) {
+    return await Itens.destroy({
+      where: {
+        id,
+        categoria_id,
+      },
+    });
+  }
 }
 
 export default new ItensRepository();

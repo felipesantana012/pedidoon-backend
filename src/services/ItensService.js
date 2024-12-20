@@ -48,6 +48,55 @@ class ItensService {
       throw new Error(gerarMenssagemError("DEFAULT", error.message));
     }
   }
+
+  async updateItem(id, categoria_id, dadosItem) {
+    try {
+      if (!id || isNaN(id) || !categoria_id || isNaN(categoria_id)) {
+        throw new Error(gerarMenssagemError("INVALID_ID"));
+      }
+
+      const itemExistente = await ItensRepository.findByIdItem(
+        id,
+        categoria_id
+      );
+      if (!itemExistente) {
+        throw new Error(gerarMenssagemError("NOT_FOUND"));
+      }
+
+      const item = await ItensRepository.updateItem(
+        id,
+        categoria_id,
+        dadosItem
+      );
+      if (!item) {
+        throw new Error(gerarMenssagemError("UPDATE_FAILED"));
+      }
+      validarCampos(dadosItem, ["nome", "preco", "descricao", "tipo", "img"]);
+      return item;
+    } catch (error) {
+      throw new Error(gerarMenssagemError("DEFAULT", error.message));
+    }
+  }
+
+  async deleteItem(id, categoria_id) {
+    try {
+      if (!id || isNaN(id) || !categoria_id || isNaN(categoria_id)) {
+        throw new Error(gerarMenssagemError("INVALID_ID"));
+      }
+
+      const itemExistente = await ItensRepository.findByIdItem(
+        id,
+        categoria_id
+      );
+      if (!itemExistente) {
+        throw new Error(gerarMenssagemError("NOT_FOUND"));
+      }
+
+      return await ItensRepository.deleteItem(id, categoria_id);
+    } catch (error) {
+      throw new Error(gerarMenssagemError("DEFAULT", error.message));
+    }
+  }
 }
 
 export default new ItensService();

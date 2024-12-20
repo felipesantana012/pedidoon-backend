@@ -21,14 +21,14 @@ routes.post(
   ItensController.createItem
 );
 
-// routes.put(
-//   "/restaurantes/:restaurante_id/categorias/:categoria_id/itens/:id",
-//   ItensController.updateCategoria
-// );
+routes.put(
+  "/restaurantes/:restaurante_id/categorias/:categoria_id/itens/:id",
+  ItensController.updateItem
+);
 
-// routes.delete(
-//   "/restaurantes/:restaurante_id/categorias/:categoria_id/itens/:id",
-//   ItensController.deleteCategoria
-// );
+routes.delete(
+  "/restaurantes/:restaurante_id/categorias/:categoria_id/itens/:id",
+  ItensController.deleteItem
+);
 
 export default routes;

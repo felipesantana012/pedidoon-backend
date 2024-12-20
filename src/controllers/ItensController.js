@@ -45,6 +45,28 @@ class ItensController {
       return res.status(statusError(error)).json({ error: error.message });
     }
   }
+
+  async updateItem(req, res) {
+    try {
+      const item = await ItensService.updateItem(
+        req.params.id,
+        req.params.categoria_id,
+        req.body
+      );
+      return res.status(200).json(item);
+    } catch (error) {
+      return res.status(statusError(error)).json({ error: error.message });
+    }
+  }
+
+  async deleteItem(req, res) {
+    try {
+      await ItensService.deleteItem(req.params.id, req.params.categoria_id);
+      return res.status(204).end();
+    } catch (error) {
+      return res.status(statusError(error)).json({ error: error.message });
+    }
+  }
 }
 
 export default new ItensController();
