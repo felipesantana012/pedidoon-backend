@@ -104,10 +104,14 @@ class RestauranteService {
         "linkmaps",
       ]);
 
-      return await RestauranteRepository.updateRestauranteEndereco(
-        id,
-        enderecoData
-      );
+      const enderecoAtualizado =
+        await RestauranteRepository.updateRestauranteEndereco(id, enderecoData);
+
+      if (!enderecoAtualizado) {
+        throw new Error(gerarMenssagemError("UPDATE_FAILED"));
+      }
+
+      return enderecoAtualizado;
     } catch (error) {
       throw new Error(gerarMenssagemError("DEFAULT", error.message));
     }
@@ -130,10 +134,17 @@ class RestauranteService {
 
       validarCampos(redeSocialData, ["whatsapp"]);
 
-      return await RestauranteRepository.updateRestauranteRedeSocial(
-        id,
-        redeSocialData
-      );
+      const redeSocialAtualizada =
+        await RestauranteRepository.updateRestauranteRedeSocial(
+          id,
+          redeSocialData
+        );
+
+      if (!redeSocialAtualizada) {
+        throw new Error(gerarMenssagemError("UPDATE_FAILED"));
+      }
+
+      return redeSocialAtualizada;
     } catch (error) {
       throw new Error(gerarMenssagemError("DEFAULT", error.message));
     }

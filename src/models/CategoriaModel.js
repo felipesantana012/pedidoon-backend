@@ -1,13 +1,14 @@
 import { DataTypes } from "sequelize";
 import sequelize from "../database/sequelize.js";
+import Itens from "./ItensModel.js";
 
 const Categoria = sequelize.define(
   "Categoria",
   {
     id: {
       type: DataTypes.INTEGER,
-      autoIncrement: true,
       primaryKey: true,
+      autoIncrement: true,
     },
 
     restaurante_id: {
@@ -29,5 +30,7 @@ const Categoria = sequelize.define(
     timestamps: false,
   }
 );
+
+Categoria.hasMany(Itens, { foreignKey: "categoria_id", as: "itens" });
 
 export default Categoria;
