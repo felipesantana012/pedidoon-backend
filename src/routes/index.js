@@ -10,7 +10,7 @@ routes.use("/auth", AuthRoutes);
 routes.use("/restaurantes", RestauranteRoutes);
 
 routes.use(authMiddleware);
-routes.use("/", CategoriaRoutes);
+routes.use("/categorias", CategoriaRoutes);
 routes.use("/", ItensRoutes);
 
 export default routes;

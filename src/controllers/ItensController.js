@@ -4,7 +4,13 @@ import { statusError } from "../utils/ErrorUtil.js";
 class ItensController {
   async getAllItens(req, res) {
     try {
-      const itens = await ItensService.getAllItens(req.params.categoria_id);
+      const { categoria_id } = req.params;
+      const restaurante_id = req.restaurante_id; // Obtém o restaurante_id do middleware
+
+      const itens = await ItensService.getAllItens(
+        categoria_id,
+        restaurante_id
+      );
       return res.status(200).json(itens);
     } catch (error) {
       return res.status(statusError(error)).json({ error: error.message });
@@ -14,7 +20,8 @@ class ItensController {
   async getAllItensDisponiveis(req, res) {
     try {
       const itens = await ItensService.getAllItensDisponiveis(
-        req.params.categoria_id
+        req.params.categoria_id,
+        req.restaurante_id
       );
       return res.status(200).json(itens);
     } catch (error) {
@@ -26,7 +33,8 @@ class ItensController {
     try {
       const item = await ItensService.getByIdItem(
         req.params.id,
-        req.params.categoria_id
+        req.params.categoria_id,
+        req.restaurante_id
       );
       return res.status(200).json(item);
     } catch (error) {
@@ -38,6 +46,7 @@ class ItensController {
     try {
       const item = await ItensService.createItem(
         req.params.categoria_id,
+        req.restaurante_id,
         req.body
       );
       return res.status(201).json(item);
@@ -51,6 +60,7 @@ class ItensController {
       const item = await ItensService.updateItem(
         req.params.id,
         req.params.categoria_id,
+        req.restaurante_id,
         req.body
       );
       return res.status(200).json(item);
@@ -61,7 +71,11 @@ class ItensController {
 
   async deleteItem(req, res) {
     try {
-      await ItensService.deleteItem(req.params.id, req.params.categoria_id);
+      await ItensService.deleteItem(
+        req.params.id,
+        req.params.categoria_id,
+        req.restaurante_id
+      );
       return res.status(204).end();
     } catch (error) {
       return res.status(statusError(error)).json({ error: error.message });

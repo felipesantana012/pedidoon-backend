@@ -44,7 +44,7 @@ class RestauranteController {
   }
 
   async updateRestauranteEndereco(req, res) {
-    const { id } = req.params;
+    const id = req.restaurante_id;
     const { endereco } = req.body;
 
     try {
@@ -61,7 +61,7 @@ class RestauranteController {
   }
 
   async updateRestauranteRedeSocial(req, res) {
-    const { id } = req.params;
+    const id = req.restaurante_id;
     const { rede_sociais } = req.body;
 
     try {

@@ -2,32 +2,20 @@ import { Router } from "express";
 import ItensController from "../controllers/ItensController.js";
 const routes = new Router();
 
+routes.get("/categorias/:categoria_id/itens", ItensController.getAllItens);
 routes.get(
-  "/restaurantes/:restaurante_id/categorias/:categoria_id/itens",
-  ItensController.getAllItens
-);
-routes.get(
-  "/restaurantes/:restaurante_id/categorias/:categoria_id/itens/disponiveis",
+  "/categorias/:categoria_id/itens/disponiveis",
   ItensController.getAllItensDisponiveis
 );
 
-routes.get(
-  "/restaurantes/:restaurante_id/categorias/:categoria_id/itens/:id",
-  ItensController.getByIdItem
-);
+routes.get("/categorias/:categoria_id/itens/:id", ItensController.getByIdItem);
 
-routes.post(
-  "/restaurantes/:restaurante_id/categorias/:categoria_id/itens",
-  ItensController.createItem
-);
+routes.post("/categorias/:categoria_id/itens", ItensController.createItem);
 
-routes.put(
-  "/restaurantes/:restaurante_id/categorias/:categoria_id/itens/:id",
-  ItensController.updateItem
-);
+routes.put("/categorias/:categoria_id/itens/:id", ItensController.updateItem);
 
 routes.delete(
-  "/restaurantes/:restaurante_id/categorias/:categoria_id/itens/:id",
+  "/categorias/:categoria_id/itens/:id",
   ItensController.deleteItem
 );
 

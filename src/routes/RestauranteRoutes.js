@@ -13,12 +13,12 @@ routes.post("/", RestauranteController.createRestaurante);
 routes.delete("/:id", RestauranteController.deleteRestaurante);
 
 routes.put(
-  "/:id/endereco",
+  "/endereco",
   authMiddleware,
   RestauranteController.updateRestauranteEndereco
 );
 routes.put(
-  "/:id/rede-sociais",
+  "/rede-sociais",
   authMiddleware,
   RestauranteController.updateRestauranteRedeSocial
 );
