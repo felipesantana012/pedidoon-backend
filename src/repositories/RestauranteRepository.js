@@ -23,10 +23,6 @@ class RestauranteRepository {
     });
   }
 
-  async findByEmail(email) {
-    return await RestauranteModel.findOne({ where: { email } });
-  }
-
   async findById(id) {
     return await RestauranteModel.findByPk(id, {
       include: [
@@ -44,6 +40,10 @@ class RestauranteRepository {
         },
       ],
     });
+  }
+
+  async findByEmail(email) {
+    return await RestauranteModel.findOne({ where: { email } });
   }
 
   async create(restaurante) {
@@ -115,6 +115,26 @@ class RestauranteRepository {
         return await RedeSocial.findOne({
           where: { restaurante_id: id },
         });
+      }
+    }
+
+    return null;
+  }
+
+  async updateRestauranteLogin(id, login) {
+    if (login) {
+      const [updated] = await RestauranteModel.update(login, {
+        where: { id },
+      });
+
+      if (updated > 0) {
+        const restuarante = await RestauranteModel.findByPk(id);
+        const loginAtualizado = {
+          id: restuarante.id,
+          email: restuarante.email,
+          senha: restuarante.senha,
+        };
+        return loginAtualizado;
       }
     }
 
