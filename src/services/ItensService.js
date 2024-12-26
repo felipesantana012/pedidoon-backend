@@ -1,13 +1,21 @@
 import ItensRepository from "../repositories/ItensRepository.js";
 import { gerarMenssagemError, validarCampos } from "../utils/ErrorUtil.js";
+import CategoriaService from "./CategoriaService.js";
 
 class ItensService {
   async getAllItens(categoria_id, restaurante_id) {
     try {
+      await CategoriaService.getByIdCategoria(categoria_id, restaurante_id);
+
       const itens = await ItensRepository.findAllItens(
         categoria_id,
         restaurante_id
       );
+
+      if (!itens) {
+        throw new Error(gerarMenssagemError("NOT_FOUND"));
+      }
+
       return itens;
     } catch (error) {
       throw new Error(gerarMenssagemError("DEFAULT", error.message));
@@ -16,10 +24,17 @@ class ItensService {
 
   async getAllItensDisponiveis(categoria_id, restaurante_id) {
     try {
+      await CategoriaService.getByIdCategoria(categoria_id, restaurante_id);
+
       const itens = await ItensRepository.findAllItensDisponiveis(
         categoria_id,
         restaurante_id
       );
+
+      if (!itens) {
+        throw new Error(gerarMenssagemError("NOT_FOUND"));
+      }
+
       return itens;
     } catch (error) {
       throw new Error(gerarMenssagemError("DEFAULT", error.message));
@@ -38,6 +53,9 @@ class ItensService {
       ) {
         throw new Error(gerarMenssagemError("INVALID_ID"));
       }
+
+      await CategoriaService.getByIdCategoria(categoria_id, restaurante_id);
+
       const item = await ItensRepository.findByIdItem(
         id,
         categoria_id,
@@ -57,6 +75,9 @@ class ItensService {
       if (!dadosItem || isNaN(restaurante_id) || isNaN(categoria_id)) {
         throw new Error(gerarMenssagemError("INVALID_DATA"));
       }
+
+      await CategoriaService.getByIdCategoria(categoria_id, restaurante_id);
+
       validarCampos(dadosItem, ["nome", "preco", "descricao", "tipo", "img"]);
       dadosItem.preco = parseFloat(dadosItem.preco);
       const item = await ItensRepository.createItem(
@@ -82,6 +103,8 @@ class ItensService {
       ) {
         throw new Error(gerarMenssagemError("INVALID_ID"));
       }
+
+      await CategoriaService.getByIdCategoria(categoria_id, restaurante_id);
 
       const itemExistente = await ItensRepository.findByIdItem(
         id,
@@ -120,6 +143,8 @@ class ItensService {
       ) {
         throw new Error(gerarMenssagemError("INVALID_ID"));
       }
+
+      await CategoriaService.getByIdCategoria(categoria_id, restaurante_id);
 
       const itemExistente = await ItensRepository.findByIdItem(
         id,

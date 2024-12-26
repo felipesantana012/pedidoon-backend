@@ -18,7 +18,7 @@ routes.put(
   RestauranteController.updateRestauranteEndereco
 );
 routes.put(
-  "/rede-sociais",
+  "/rede_sociais",
   authMiddleware,
   RestauranteController.updateRestauranteRedeSocial
 );

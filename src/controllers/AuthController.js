@@ -1,19 +1,17 @@
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
-import RestauranteRepository from "../repositories/RestauranteRepository.js"; // Repositório para buscar restaurante no banco
+import RestauranteRepository from "../repositories/RestauranteRepository.js";
 
 const AuthController = {
   async login(req, res) {
     const { email, senha } = req.body;
 
     try {
-      // Verificar se o restaurante existe
       const restaurante = await RestauranteRepository.findByEmail(email);
       if (!restaurante) {
         return res.status(404).json({ error: "Restaurante não encontrado" });
       }
 
-      // Verificar se a senha está correta
       const senhaValida = await bcrypt.compare(senha, restaurante.senha);
       if (!senhaValida) {
         return res.status(401).json({ error: "Senha inválida" });
