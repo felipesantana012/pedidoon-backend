@@ -3,7 +3,7 @@ import { statusError } from "../utils/ErrorUtil.js";
 
 class CategoriaController {
   async getAllCategorias(req, res) {
-    const { restaurante_id } = req.params;
+    const restaurante_id = req.restaurante_id;
     try {
       const categorias = await CategoriaService.getAllCategorias(
         restaurante_id
@@ -15,7 +15,8 @@ class CategoriaController {
   }
 
   async getByIdCategoria(req, res) {
-    const { id, restaurante_id } = req.params;
+    const { id } = req.params;
+    const restaurante_id = req.restaurante_id;
     try {
       const categoria = await CategoriaService.getByIdCategoria(
         id,
@@ -28,7 +29,7 @@ class CategoriaController {
   }
 
   async createCategoria(req, res) {
-    const { restaurante_id } = req.params;
+    const restaurante_id = req.restaurante_id;
     const categoria = req.body;
 
     try {
@@ -44,7 +45,8 @@ class CategoriaController {
   }
 
   async updateCategoria(req, res) {
-    const { restaurante_id, id } = req.params;
+    const { id } = req.params;
+    const restaurante_id = req.restaurante_id;
     const categoria = req.body;
 
     try {
@@ -61,7 +63,8 @@ class CategoriaController {
   }
 
   async deleteCategoria(req, res) {
-    const { restaurante_id, id } = req.params;
+    const { id } = req.params;
+    const restaurante_id = req.restaurante_id;
 
     try {
       await CategoriaService.deleteCategoria(id, restaurante_id);

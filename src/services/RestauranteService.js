@@ -1,5 +1,6 @@
 import RestauranteRepository from "../repositories/RestauranteRepository.js";
 import { gerarMenssagemError, validarCampos } from "../utils/ErrorUtil.js";
+import bcrypt from "bcryptjs";
 
 class RestauranteService {
   async getAllRestaurantes() {
@@ -57,6 +58,10 @@ class RestauranteService {
       if (emailExistente) {
         throw new Error(gerarMenssagemError("DUPLICATE_EMAIL"));
       }
+
+      // Criptografar a senha antes de salvar
+      const salt = await bcrypt.genSalt(10); // Gera um salt com fator de custo 10
+      restauranteData.senha = await bcrypt.hash(restauranteData.senha, salt);
 
       return await RestauranteRepository.create(restauranteData);
     } catch (error) {

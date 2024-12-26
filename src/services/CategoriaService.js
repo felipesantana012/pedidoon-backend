@@ -1,9 +1,11 @@
 import CategoriaRepository from "../repositories/CategoriaRepository.js";
 import { gerarMenssagemError, validarCampos } from "../utils/ErrorUtil.js";
+import RestauranteService from "./RestauranteService.js";
 
 class CategoriaService {
   async getAllCategorias(restaurante_id) {
     try {
+      await RestauranteService.getRestauranteById(restaurante_id);
       const categorias = await CategoriaRepository.findAllCategorias(
         restaurante_id
       );
@@ -18,6 +20,7 @@ class CategoriaService {
       if (!id || isNaN(id) || !restaurante_id || isNaN(restaurante_id)) {
         throw new Error(gerarMenssagemError("INVALID_ID"));
       }
+      await RestauranteService.getRestauranteById(restaurante_id);
 
       const categoria = await CategoriaRepository.findByIdCategoria(
         id,
@@ -39,6 +42,7 @@ class CategoriaService {
       if (!restaurante_id || isNaN(restaurante_id)) {
         throw new Error(gerarMenssagemError("INVALID_ID"));
       }
+      await RestauranteService.getRestauranteById(restaurante_id);
 
       validarCampos(dadosCategoria, ["nome"]);
 
@@ -57,6 +61,7 @@ class CategoriaService {
       if (!id || isNaN(id) || !restaurante_id || isNaN(restaurante_id)) {
         throw new Error(gerarMenssagemError("INVALID_ID"));
       }
+      await RestauranteService.getRestauranteById(restaurante_id);
 
       const categoriaExistente = await CategoriaRepository.findByIdCategoria(
         id,
@@ -90,6 +95,7 @@ class CategoriaService {
       if (!id || isNaN(id) || !restaurante_id || isNaN(restaurante_id)) {
         throw new Error(gerarMenssagemError("INVALID_ID"));
       }
+      await RestauranteService.getRestauranteById(restaurante_id);
 
       const categoriaExistente = await CategoriaRepository.findByIdCategoria(
         id,

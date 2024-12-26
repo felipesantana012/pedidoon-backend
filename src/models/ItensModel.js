@@ -17,6 +17,15 @@ const Itens = sequelize.define(
       },
       onDelete: "CASCADE",
     },
+    restaurante_id: {
+      type: sequelize.Sequelize.INTEGER,
+      allowNull: false,
+      references: {
+        model: "Restaurante",
+        key: "id",
+      },
+      onDelete: "CASCADE",
+    },
     nome: {
       type: sequelize.Sequelize.STRING,
       allowNull: false,

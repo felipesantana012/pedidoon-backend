@@ -1,5 +1,7 @@
 import { Router } from "express";
 import RestauranteController from "../controllers/RestauranteController.js";
+import authMiddleware from "../middleware/authMiddleware.js";
+
 const routes = new Router();
 
 routes.get("/", RestauranteController.getAllRestaurantes);
@@ -10,9 +12,14 @@ routes.post("/", RestauranteController.createRestaurante);
 
 routes.delete("/:id", RestauranteController.deleteRestaurante);
 
-routes.put("/:id/endereco", RestauranteController.updateRestauranteEndereco);
 routes.put(
-  "/:id/rede-sociais",
+  "/endereco",
+  authMiddleware,
+  RestauranteController.updateRestauranteEndereco
+);
+routes.put(
+  "/rede_sociais",
+  authMiddleware,
   RestauranteController.updateRestauranteRedeSocial
 );
 
