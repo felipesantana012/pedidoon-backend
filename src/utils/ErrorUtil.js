@@ -1,16 +1,16 @@
 const messages = {
   NOT_FOUND: "Recurso ou id não encontrado.",
   INVALID_ID: "ID inválido.",
-  MISSING_FIELDS: "Campos obrigatórios faltando: ",
-  DUPLICATE_EMAIL: "Email já cadastrado. Tente outro email.",
+  MISSING_FIELDS: "Campos obrigatórios faltando:  ",
+  DUPLICATE_EMAIL: "Email já cadastrado, Tente outro email.",
   PASSWORD_TOO_SHORT: "A senha deve ter no mínimo 4 caracteres.",
   REQUEST_BODY_INVALID: "Corpo da requisição inválido.",
-  UPDATE_FAILED: "Falha ao atualizar. Registro não foi alterado",
-  DEFAULT: "Erro ao processar a solicitação.",
+  UPDATE_FAILED: "Falha ao atualizar, Registro não foi alterado.",
+  DEFAULT: "Erro ao processar a solicitação: => ",
 };
 
 export function gerarMenssagemError(type, details = "") {
-  return `${messages[type]} ${details}`;
+  return `${messages[type]}  ${details} `;
 }
 
 export function validarCampos(fields, requiredFields) {

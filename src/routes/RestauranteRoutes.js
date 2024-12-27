@@ -12,15 +12,9 @@ routes.post("/", RestauranteController.createRestaurante);
 
 routes.delete("/:id", RestauranteController.deleteRestaurante);
 
-routes.put(
-  "/endereco",
-  authMiddleware,
-  RestauranteController.updateRestauranteEndereco
-);
-routes.put(
-  "/rede_sociais",
-  authMiddleware,
-  RestauranteController.updateRestauranteRedeSocial
-);
+routes.use(authMiddleware);
+routes.put("/endereco", RestauranteController.updateRestauranteEndereco);
+routes.put("/rede_sociais", RestauranteController.updateRestauranteRedeSocial);
+routes.put("/login", RestauranteController.updateRestauranteLogin);
 
 export default routes;

@@ -3,6 +3,7 @@ import RestauranteRoutes from "./RestauranteRoutes.js";
 import CategoriaRoutes from "./CategoriaRoutes.js";
 import ItensRoutes from "./ItensRoutes.js";
 import AuthRoutes from "./AuthRoutes.js";
+import PromocaoDiaRoutes from "./PromocaoDiaRoutes.js";
 import authMiddleware from "../middleware/authMiddleware.js";
 const routes = new Router();
 
@@ -12,5 +13,6 @@ routes.use("/restaurantes", RestauranteRoutes);
 routes.use(authMiddleware);
 routes.use("/categorias", CategoriaRoutes);
 routes.use("/", ItensRoutes);
+routes.use("/promocao_dia", PromocaoDiaRoutes);
 
 export default routes;

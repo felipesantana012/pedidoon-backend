@@ -2,6 +2,7 @@ import { Router } from "express";
 import ItensController from "../controllers/ItensController.js";
 const routes = new Router();
 
+routes.get("/itens", ItensController.getAllItensAllRestaurante);
 routes.get("/categorias/:categoria_id/itens", ItensController.getAllItens);
 routes.get(
   "/categorias/:categoria_id/itens/disponiveis",

@@ -76,6 +76,23 @@ class RestauranteController {
       res.status(statusError(error)).json({ error: error.message });
     }
   }
+
+  async updateRestauranteLogin(req, res) {
+    const id = req.restaurante_id;
+    const login = req.body;
+
+    try {
+      const restauranteAtualizado =
+        await RestauranteService.updateRestauranteLogin(id, login);
+
+      res.status(200).json({
+        message: "Login atualizado com sucesso.",
+        data: restauranteAtualizado,
+      });
+    } catch (error) {
+      res.status(statusError(error)).json({ error: error.message });
+    }
+  }
 }
 
 export default new RestauranteController();

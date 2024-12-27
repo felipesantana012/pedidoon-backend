@@ -154,6 +154,46 @@ class RestauranteService {
       throw new Error(gerarMenssagemError("DEFAULT", error.message));
     }
   }
+
+  async updateRestauranteLogin(id, loginData) {
+    try {
+      if (!loginData) {
+        throw new Error(gerarMenssagemError("REQUEST_BODY_INVALID"));
+      }
+      if (!id || isNaN(id)) {
+        throw new Error(gerarMenssagemError("INVALID_ID"));
+      }
+      validarCampos(loginData, ["email", "senha"]);
+
+      if (loginData.email) {
+        const emailExistente = await RestauranteRepository.findByEmail(
+          loginData.email
+        );
+        if (emailExistente && emailExistente.id !== id) {
+          throw new Error(gerarMenssagemError("DUPLICATE_EMAIL"));
+        }
+      }
+
+      if (loginData.senha.length < 4) {
+        throw new Error(gerarMenssagemError("PASSWORD_TOO_SHORT"));
+      }
+
+      // Criptografar a senha antes de salvar
+      const salt = await bcrypt.genSalt(10); // Gera um salt com fator de custo 10
+      loginData.senha = await bcrypt.hash(loginData.senha, salt);
+
+      const loginAtualizado =
+        await RestauranteRepository.updateRestauranteLogin(id, loginData);
+
+      if (!loginAtualizado) {
+        throw new Error(gerarMenssagemError("UPDATE_FAILED"));
+      }
+
+      return loginAtualizado;
+    } catch (error) {
+      throw new Error(gerarMenssagemError("DEFAULT", error.message));
+    }
+  }
 }
 
 export default new RestauranteService();

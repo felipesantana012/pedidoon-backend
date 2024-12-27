@@ -41,6 +41,22 @@ class ItensService {
     }
   }
 
+  async getAllItensAllRestaurante(restaurante_id) {
+    try {
+      const itens = await ItensRepository.findAllItensAllRestaurante(
+        restaurante_id
+      );
+
+      if (!itens) {
+        throw new Error(gerarMenssagemError("NOT_FOUND"));
+      }
+
+      return itens;
+    } catch (error) {
+      throw new Error(gerarMenssagemError("DEFAULT", error.message));
+    }
+  }
+
   async getByIdItem(id, categoria_id, restaurante_id) {
     try {
       if (
