@@ -46,11 +46,6 @@ const Itens = sequelize.define(
       type: sequelize.Sequelize.STRING,
       allowNull: false,
     },
-    promocao_dia: {
-      type: sequelize.Sequelize.BOOLEAN,
-      allowNull: false,
-      defaultValue: false,
-    },
     disponivel: {
       type: sequelize.Sequelize.BOOLEAN,
       allowNull: false,
