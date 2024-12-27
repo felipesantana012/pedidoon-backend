@@ -13,6 +13,12 @@ class ItensRepository {
     });
   }
 
+  async findAllItensAllRestaurante(restaurante_id) {
+    return await Itens.findAll({
+      where: { restaurante_id },
+    });
+  }
+
   async findByIdItem(id, categoria_id, restaurante_id) {
     return await Itens.findOne({
       where: {

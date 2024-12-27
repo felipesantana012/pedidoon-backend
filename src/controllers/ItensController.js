@@ -29,6 +29,17 @@ class ItensController {
     }
   }
 
+  async getAllItensAllRestaurante(req, res) {
+    try {
+      const itens = await ItensService.getAllItensAllRestaurante(
+        req.restaurante_id
+      );
+      return res.status(200).json(itens);
+    } catch (error) {
+      return res.status(statusError(error)).json({ error: error.message });
+    }
+  }
+
   async getByIdItem(req, res) {
     try {
       const item = await ItensService.getByIdItem(
