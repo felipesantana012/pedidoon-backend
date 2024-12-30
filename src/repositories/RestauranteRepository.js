@@ -5,22 +5,7 @@ import RestauranteModel from "../models/RestauranteModel.js";
 
 class RestauranteRepository {
   async findAll() {
-    return await RestauranteModel.findAll({
-      include: [
-        {
-          model: Endereco,
-          as: "endereco",
-        },
-        {
-          model: RedeSocial,
-          as: "rede_sociais",
-        },
-        {
-          model: Categoria,
-          as: "categorias",
-        },
-      ],
-    });
+    return await RestauranteModel.findAll({});
   }
 
   async findById(id) {
