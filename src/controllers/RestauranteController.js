@@ -1,3 +1,4 @@
+import ImagemService from "../services/ImagemService.js";
 import RestauranteService from "../services/RestauranteService.js";
 import { statusError } from "../utils/ErrorUtil.js";
 
@@ -45,11 +46,39 @@ class RestauranteController {
 
   async updateRestauranteEndereco(req, res) {
     const id = req.restaurante_id;
-    const { endereco } = req.body;
+    const { file } = req;
+    let url_img_restaurante = req.body.img_restaurante;
 
     try {
+      if (req.fileValidationError) {
+        return res.status(400).json({ error: req.fileValidationError });
+      }
+
+      if (file) {
+        const restaurante = await RestauranteService.getRestauranteById(id);
+
+        if (restaurante && restaurante.endereco.img_restaurante) {
+          await ImagemService.removerImagem(
+            restaurante.endereco.img_restaurante
+          );
+        }
+
+        url_img_restaurante = ImagemService.gerarCaminhoImagem(
+          id,
+          file.filename
+        );
+      }
+
+      const updatedEnderecoData = {
+        ...req.body,
+        img_restaurante: url_img_restaurante,
+      };
+
       const restauranteAtualizado =
-        await RestauranteService.updateRestauranteEndereco(id, endereco);
+        await RestauranteService.updateRestauranteEndereco(
+          id,
+          updatedEnderecoData
+        );
 
       res.status(200).json({
         message: "Endereço atualizado com sucesso.",

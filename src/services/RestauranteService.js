@@ -39,12 +39,7 @@ class RestauranteService {
         "endereco",
         "rede_sociais",
       ]);
-      validarCampos(restauranteData.endereco, [
-        "rua",
-        "bairro",
-        "cidade",
-        "estado",
-      ]);
+      validarCampos(restauranteData.endereco, ["estado"]);
 
       validarCampos(restauranteData.rede_sociais, ["whatsapp"]);
 

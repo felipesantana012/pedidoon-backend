@@ -17,14 +17,17 @@ const Endereco = sequelize.define(
     rua: {
       type: DataTypes.STRING,
       allowNull: false,
+      defaultValue: "sua-rua",
     },
     bairro: {
       type: DataTypes.STRING,
       allowNull: false,
+      defaultValue: "seu-bairro",
     },
     cidade: {
       type: DataTypes.STRING,
       allowNull: false,
+      defaultValue: "sua-cidade",
     },
     estado: {
       type: DataTypes.STRING,
@@ -34,6 +37,11 @@ const Endereco = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
       defaultValue: "https://www.google.com/maps",
+    },
+    img_restaurante: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      defaultValue: "sua-imagem-restaurante.png",
     },
   },
   {
