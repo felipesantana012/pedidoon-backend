@@ -1,3 +1,4 @@
+import ImagemService from "../services/ImagemService.js";
 import ItensService from "../services/ItensService.js";
 import { statusError } from "../utils/ErrorUtil.js";
 
@@ -5,7 +6,7 @@ class ItensController {
   async getAllItens(req, res) {
     try {
       const { categoria_id } = req.params;
-      const restaurante_id = req.restaurante_id; // Obtém o restaurante_id do middleware
+      const restaurante_id = req.restaurante_id;
 
       const itens = await ItensService.getAllItens(
         categoria_id,
@@ -54,11 +55,29 @@ class ItensController {
   }
 
   async createItem(req, res) {
+    if (req.fileValidationError) {
+      return res.status(400).json({ error: req.fileValidationError });
+    }
+
+    const { file } = req;
+    let imageUrl = null;
+
+    if (file) {
+      imageUrl = ImagemService.gerarCaminhoImagem(
+        req.restaurante_id,
+        file.filename
+      );
+    }
+    const itemData = {
+      ...req.body,
+      img: imageUrl,
+    };
+
     try {
       const item = await ItensService.createItem(
         req.params.categoria_id,
         req.restaurante_id,
-        req.body
+        itemData
       );
       return res.status(201).json(item);
     } catch (error) {
@@ -68,11 +87,40 @@ class ItensController {
 
   async updateItem(req, res) {
     try {
+      if (req.fileValidationError) {
+        return res.status(400).json({ error: req.fileValidationError });
+      }
+      const { file } = req;
+      const { id, categoria_id } = req.params;
+      const { restaurante_id } = req;
+      let imageUrl = req.body.img;
+
+      if (file) {
+        const item = await ItensService.getByIdItem(
+          id,
+          categoria_id,
+          restaurante_id
+        );
+        if (item && item.img) {
+          await ImagemService.removerImagem(item.img);
+        }
+
+        imageUrl = ImagemService.gerarCaminhoImagem(
+          restaurante_id,
+          file.filename
+        );
+      }
+
+      const updatedItemData = {
+        ...req.body,
+        img: imageUrl,
+      };
+
       const item = await ItensService.updateItem(
         req.params.id,
         req.params.categoria_id,
         req.restaurante_id,
-        req.body
+        updatedItemData
       );
       return res.status(200).json(item);
     } catch (error) {
@@ -82,11 +130,21 @@ class ItensController {
 
   async deleteItem(req, res) {
     try {
-      await ItensService.deleteItem(
-        req.params.id,
-        req.params.categoria_id,
-        req.restaurante_id
+      const { id, categoria_id } = req.params;
+      const { restaurante_id } = req;
+
+      const item = await ItensService.getByIdItem(
+        id,
+        categoria_id,
+        restaurante_id
       );
+
+      if (item && item.img) {
+        await ImagemService.removerImagem(item.img);
+      }
+
+      await ItensService.deleteItem(id, categoria_id, restaurante_id);
+
       return res.status(204).end();
     } catch (error) {
       return res.status(statusError(error)).json({ error: error.message });
