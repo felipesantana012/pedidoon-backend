@@ -43,23 +43,6 @@ class RestauranteController {
     }
   }
 
-  async updateRestauranteEndereco(req, res) {
-    const id = req.restaurante_id;
-    const { endereco } = req.body;
-
-    try {
-      const restauranteAtualizado =
-        await RestauranteService.updateRestauranteEndereco(id, endereco);
-
-      res.status(200).json({
-        message: "Endereço atualizado com sucesso.",
-        data: restauranteAtualizado,
-      });
-    } catch (error) {
-      res.status(statusError(error)).json({ error: error.message });
-    }
-  }
-
   async updateRestauranteRedeSocial(req, res) {
     const id = req.restaurante_id;
     const { rede_sociais } = req.body;

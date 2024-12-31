@@ -3,6 +3,9 @@ import path from "path";
 
 class ImagemService {
   static async removerImagem(imagePath) {
+    if (imagePath == "sua-imagem-restaurante.png") {
+      return;
+    }
     try {
       const imagePathWithoutLeadingSlash = imagePath.startsWith("/")
         ? imagePath.slice(1)
@@ -21,7 +24,8 @@ class ImagemService {
       await fs.unlink(imagePathWithAbsoluteDir);
     } catch (error) {
       if (error.code === "ENOENT") {
-        throw new Error("A imagem não foi encontrada.");
+        console.warn(`Imagem não encontrada: ${imagePath}`);
+        return;
       }
       throw new Error("Erro ao remover a imagem.");
     }
