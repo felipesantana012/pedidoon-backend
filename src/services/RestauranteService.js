@@ -81,41 +81,58 @@ class RestauranteService {
     }
   }
 
-  async updateRestauranteEndereco(id, enderecoData) {
-    try {
-      if (!enderecoData) {
-        throw new Error(gerarMenssagemError("REQUEST_BODY_INVALID"));
-      }
+  // async getRestauranteEndereco(id) {
+  //   try {
+  //     if (!id || isNaN(id)) {
+  //       throw new Error(gerarMenssagemError("INVALID_ID"));
+  //     }
 
-      if (!id || isNaN(id)) {
-        throw new Error(gerarMenssagemError("INVALID_ID"));
-      }
+  //     const endereco = await RestauranteRepository.getRestauranteEndereco(id);
+  //     if (!endereco) {
+  //       throw new Error(gerarMenssagemError("NOT_FOUND"));
+  //     }
 
-      const dadosRestaurante = await RestauranteRepository.findById(id);
-      if (!dadosRestaurante) {
-        throw new Error(gerarMenssagemError("NOT_FOUND"));
-      }
+  //     return endereco;
+  //   } catch (error) {
+  //     throw new Error(gerarMenssagemError("DEFAULT", error.message));
+  //   }
+  // }
 
-      validarCampos(enderecoData, [
-        "rua",
-        "bairro",
-        "cidade",
-        "estado",
-        "linkmaps",
-      ]);
+  // async updateRestauranteEndereco(id, enderecoData) {
+  //   try {
+  //     if (!enderecoData) {
+  //       throw new Error(gerarMenssagemError("REQUEST_BODY_INVALID"));
+  //     }
 
-      const enderecoAtualizado =
-        await RestauranteRepository.updateRestauranteEndereco(id, enderecoData);
+  //     if (!id || isNaN(id)) {
+  //       throw new Error(gerarMenssagemError("INVALID_ID"));
+  //     }
 
-      if (!enderecoAtualizado) {
-        throw new Error(gerarMenssagemError("UPDATE_FAILED"));
-      }
+  //     const dadosRestaurante = await RestauranteRepository.findById(id);
+  //     if (!dadosRestaurante) {
+  //       throw new Error(gerarMenssagemError("NOT_FOUND"));
+  //     }
 
-      return enderecoAtualizado;
-    } catch (error) {
-      throw new Error(gerarMenssagemError("DEFAULT", error.message));
-    }
-  }
+  //     validarCampos(enderecoData, [
+  //       "rua",
+  //       "bairro",
+  //       "cidade",
+  //       "estado",
+  //       "linkmaps",
+  //     ]);
+
+  //     const enderecoAtualizado =
+  //       await RestauranteRepository.updateRestauranteEndereco(id, enderecoData);
+
+  //     if (!enderecoAtualizado) {
+  //       throw new Error(gerarMenssagemError("UPDATE_FAILED"));
+  //     }
+
+  //     return enderecoAtualizado;
+  //   } catch (error) {
+  //     throw new Error(gerarMenssagemError("DEFAULT", error.message));
+  //   }
+  // }
 
   async updateRestauranteRedeSocial(id, redeSocialData) {
     try {

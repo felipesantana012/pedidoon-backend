@@ -24,7 +24,8 @@ class ImagemService {
       await fs.unlink(imagePathWithAbsoluteDir);
     } catch (error) {
       if (error.code === "ENOENT") {
-        throw new Error("A imagem não foi encontrada.");
+        console.warn(`Imagem não encontrada: ${imagePath}`);
+        return;
       }
       throw new Error("Erro ao remover a imagem.");
     }
