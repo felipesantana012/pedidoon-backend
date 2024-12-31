@@ -4,11 +4,11 @@ import authMiddleware from "../middleware/authMiddleware.js";
 
 const routes = new Router();
 
-routes.put(
-  "/rede_sociais",
-  authMiddleware,
-  RestauranteController.updateRestauranteRedeSocial
-);
+// routes.put(
+//   "/rede_sociais",
+//   authMiddleware,
+//   RestauranteController.updateRestauranteRedeSocial
+// );
 routes.put(
   "/login",
   authMiddleware,

@@ -74,28 +74,6 @@ class RestauranteRepository {
     return deleted;
   }
 
-  // async getRestauranteEndereco(id) {
-  //   return await Endereco.findOne({
-  //     where: { restaurante_id: id },
-  //   });
-  // }
-
-  // async updateRestauranteEndereco(id, endereco) {
-  //   if (endereco) {
-  //     const [updated] = await Endereco.update(endereco, {
-  //       where: { restaurante_id: id },
-  //     });
-
-  //     if (updated > 0) {
-  //       return await Endereco.findOne({
-  //         where: { restaurante_id: id },
-  //       });
-  //     }
-  //   }
-
-  //   return null;
-  // }
-
   async updateRestauranteRedeSocial(id, redeSocial) {
     if (redeSocial) {
       const [updated] = await RedeSocial.update(redeSocial, {
