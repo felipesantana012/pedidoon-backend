@@ -22,6 +22,7 @@ const RedeSocial = sequelize.define(
     whatsapp: {
       type: DataTypes.STRING,
       allowNull: false,
+      defaultValue: "81 9 8888-8888",
     },
     tiktok: {
       type: DataTypes.STRING,

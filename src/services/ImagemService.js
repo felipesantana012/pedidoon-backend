@@ -3,9 +3,6 @@ import path from "path";
 
 class ImagemService {
   static async removerImagem(imagePath) {
-    if (imagePath == "sua-imagem-restaurante.png") {
-      return;
-    }
     try {
       const imagePathWithoutLeadingSlash = imagePath.startsWith("/")
         ? imagePath.slice(1)

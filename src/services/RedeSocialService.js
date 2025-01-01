@@ -1,5 +1,6 @@
 import RedeSocialRepository from "../repositories/RedeSocialRepository.js";
-import { gerarMenssagemError } from "../utils/ErrorUtil.js";
+import { gerarMenssagemError, validarCampos } from "../utils/ErrorUtil.js";
+import RestauranteService from "./RestauranteService.js";
 
 class RedeSocialService {
   async getRedeSocial(id_restaurante) {
@@ -23,10 +24,17 @@ class RedeSocialService {
 
   async updateRedeSocial(id_restaurante, redesocial) {
     try {
+      if (!redesocial) {
+        throw new Error(gerarMenssagemError("REQUEST_BODY_INVALID"));
+      }
+
       if (!id_restaurante || isNaN(id_restaurante)) {
         throw new Error(gerarMenssagemError("INVALID_ID"));
       }
 
+      await RestauranteService.getRestauranteById(id_restaurante);
+
+      validarCampos(redesocial, ["whatsapp"]);
       const redeSocial = await RedeSocialRepository.updateRedeSocial(
         id_restaurante,
         redesocial

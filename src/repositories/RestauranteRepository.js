@@ -1,5 +1,6 @@
 import Categoria from "../models/CategoriaModel.js";
 import Endereco from "../models/EnderecoModel.js";
+import OutrasConfig from "../models/OutrasConfigModel.js";
 import RedeSocial from "../models/RedeSocial.js";
 import RestauranteModel from "../models/RestauranteModel.js";
 
@@ -23,6 +24,7 @@ class RestauranteRepository {
           model: Categoria,
           as: "categorias",
         },
+        { model: OutrasConfig, as: "outras_config" },
       ],
     });
   }
@@ -46,6 +48,7 @@ class RestauranteRepository {
           model: Categoria,
           as: "categorias",
         },
+        { model: OutrasConfig, as: "outras_config" },
       ],
     });
 
@@ -63,6 +66,7 @@ class RestauranteRepository {
           model: Categoria,
           as: "categorias",
         },
+        { model: OutrasConfig, as: "outras_config" },
       ],
     });
   }
@@ -72,22 +76,6 @@ class RestauranteRepository {
       where: { id },
     });
     return deleted;
-  }
-
-  async updateRestauranteRedeSocial(id, redeSocial) {
-    if (redeSocial) {
-      const [updated] = await RedeSocial.update(redeSocial, {
-        where: { restaurante_id: id },
-      });
-
-      if (updated > 0) {
-        return await RedeSocial.findOne({
-          where: { restaurante_id: id },
-        });
-      }
-    }
-
-    return null;
   }
 
   async updateRestauranteLogin(id, login) {
