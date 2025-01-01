@@ -1,28 +1,30 @@
-import EnderecoRepository from "../repositories/EnderecoRepository.js";
+import OutrasConfigRepository from "../repositories/OutrasConfigRepository.js";
 import { gerarMenssagemError, validarCampos } from "../utils/ErrorUtil.js";
 import RestauranteService from "./RestauranteService.js";
 
-class EnderecoService {
-  async getEndereco(restaurante_id) {
+class OutrasConfigService {
+  async getOutrasConfig(restaurante_id) {
     try {
       if (!restaurante_id || isNaN(restaurante_id)) {
         throw new Error(gerarMenssagemError("INVALID_ID"));
       }
 
-      const endereco = await EnderecoRepository.getEndereco(restaurante_id);
-      if (!endereco) {
+      const config = await OutrasConfigRepository.getOutrasConfig(
+        restaurante_id
+      );
+      if (!config) {
         throw new Error(gerarMenssagemError("NOT_FOUND"));
       }
 
-      return endereco;
+      return config;
     } catch (error) {
       throw new Error(gerarMenssagemError("DEFAULT", error.message));
     }
   }
 
-  async updateEndereco(restaurante_id, enderecoData) {
+  async updateOutrasConfig(restaurante_id, outrasConfig) {
     try {
-      if (!enderecoData) {
+      if (!outrasConfig) {
         throw new Error(gerarMenssagemError("REQUEST_BODY_INVALID"));
       }
 
@@ -32,28 +34,21 @@ class EnderecoService {
 
       await RestauranteService.getRestauranteById(restaurante_id);
 
-      validarCampos(enderecoData, [
-        "rua",
-        "bairro",
-        "cidade",
-        "estado",
-        "linkmaps",
-      ]);
-
-      const enderecoAtualizado = await EnderecoRepository.updateEndereco(
+      validarCampos(outrasConfig, ["img_logo"]);
+      const configAtualizado = await OutrasConfigRepository.updateOutrasConfig(
         restaurante_id,
-        enderecoData
+        outrasConfig
       );
 
-      if (!enderecoAtualizado) {
+      if (!configAtualizado) {
         throw new Error(gerarMenssagemError("UPDATE_FAILED"));
       }
 
-      return enderecoAtualizado;
+      return configAtualizado;
     } catch (error) {
       throw new Error(gerarMenssagemError("DEFAULT", error.message));
     }
   }
 }
 
-export default new EnderecoService();
+export default new OutrasConfigService();

@@ -1,18 +1,18 @@
 import { DataTypes } from "sequelize";
 import sequelize from "../database/sequelize.js";
-import Itens from "./ItensModel.js";
 
-const Categoria = sequelize.define(
-  "Categoria",
+const OutrasConfig = sequelize.define(
+  "OutrasConfig",
   {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
+      allowNull: false,
       autoIncrement: true,
     },
-
     restaurante_id: {
       type: DataTypes.INTEGER,
+      primaryKey: true,
       allowNull: false,
       references: {
         model: "Restaurante",
@@ -20,15 +20,16 @@ const Categoria = sequelize.define(
       },
       onDelete: "CASCADE",
     },
-    nome: {
+    img_logo: {
       type: DataTypes.STRING,
       allowNull: false,
+      defaultValue: "sua-imagem-logo.png",
     },
   },
   {
-    tableName: "categoria",
+    tableName: "outras_config",
     timestamps: false,
   }
 );
 
-export default Categoria;
+export default OutrasConfig;

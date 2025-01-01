@@ -12,7 +12,7 @@ const PromocaoDia = sequelize.define(
     },
     item_id: {
       type: DataTypes.INTEGER,
-      allowNull: true, // Pode ser null se não houver item em promoção
+      allowNull: true,
       references: {
         model: "Itens",
         key: "id",
@@ -24,11 +24,5 @@ const PromocaoDia = sequelize.define(
     timestamps: false,
   }
 );
-
-// Associações
-PromocaoDia.belongsTo(Itens, {
-  foreignKey: "item_id",
-  as: "itens", // Alias para acessar o item relacionado a uma promoção
-});
 
 export default PromocaoDia;
