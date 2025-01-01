@@ -3,13 +3,13 @@ import { gerarMenssagemError, validarCampos } from "../utils/ErrorUtil.js";
 import RestauranteService from "./RestauranteService.js";
 
 class EnderecoService {
-  async getEndereco(id_restaurante) {
+  async getEndereco(restaurante_id) {
     try {
-      if (!id_restaurante || isNaN(id_restaurante)) {
+      if (!restaurante_id || isNaN(restaurante_id)) {
         throw new Error(gerarMenssagemError("INVALID_ID"));
       }
 
-      const endereco = await EnderecoRepository.getEndereco(id_restaurante);
+      const endereco = await EnderecoRepository.getEndereco(restaurante_id);
       if (!endereco) {
         throw new Error(gerarMenssagemError("NOT_FOUND"));
       }
@@ -20,17 +20,17 @@ class EnderecoService {
     }
   }
 
-  async updateEndereco(id_restaurante, enderecoData) {
+  async updateEndereco(restaurante_id, enderecoData) {
     try {
       if (!enderecoData) {
         throw new Error(gerarMenssagemError("REQUEST_BODY_INVALID"));
       }
 
-      if (!id_restaurante || isNaN(id_restaurante)) {
+      if (!restaurante_id || isNaN(restaurante_id)) {
         throw new Error(gerarMenssagemError("INVALID_ID"));
       }
 
-      await RestauranteService.getRestauranteById(id_restaurante);
+      await RestauranteService.getRestauranteById(restaurante_id);
 
       validarCampos(enderecoData, [
         "rua",
@@ -41,7 +41,7 @@ class EnderecoService {
       ]);
 
       const enderecoAtualizado = await EnderecoRepository.updateEndereco(
-        id_restaurante,
+        restaurante_id,
         enderecoData
       );
 

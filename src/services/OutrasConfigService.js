@@ -1,5 +1,6 @@
 import OutrasConfigRepository from "../repositories/OutrasConfigRepository.js";
-import { gerarMenssagemError } from "../utils/ErrorUtil.js";
+import { gerarMenssagemError, validarCampos } from "../utils/ErrorUtil.js";
+import RestauranteService from "./RestauranteService.js";
 
 class OutrasConfigService {
   async getOutrasConfig(restaurante_id) {
@@ -16,6 +17,34 @@ class OutrasConfigService {
       }
 
       return config;
+    } catch (error) {
+      throw new Error(gerarMenssagemError("DEFAULT", error.message));
+    }
+  }
+
+  async updateOutrasConfig(restaurante_id, outrasConfig) {
+    try {
+      if (!outrasConfig) {
+        throw new Error(gerarMenssagemError("REQUEST_BODY_INVALID"));
+      }
+
+      if (!restaurante_id || isNaN(restaurante_id)) {
+        throw new Error(gerarMenssagemError("INVALID_ID"));
+      }
+
+      await RestauranteService.getRestauranteById(restaurante_id);
+
+      validarCampos(outrasConfig, ["img_logo"]);
+      const configAtualizado = await OutrasConfigRepository.updateOutrasConfig(
+        restaurante_id,
+        outrasConfig
+      );
+
+      if (!configAtualizado) {
+        throw new Error(gerarMenssagemError("UPDATE_FAILED"));
+      }
+
+      return configAtualizado;
     } catch (error) {
       throw new Error(gerarMenssagemError("DEFAULT", error.message));
     }

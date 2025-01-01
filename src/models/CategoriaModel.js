@@ -31,6 +31,4 @@ const Categoria = sequelize.define(
   }
 );
 
-Categoria.hasMany(Itens, { foreignKey: "categoria_id", as: "itens" });
-
 export default Categoria;
