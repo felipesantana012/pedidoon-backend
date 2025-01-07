@@ -34,7 +34,11 @@ class OutrasConfigService {
 
       await RestauranteService.getRestauranteById(restaurante_id);
 
-      validarCampos(outrasConfig, ["img_logo"]);
+      validarCampos(outrasConfig, [
+        "img_logo",
+        "nome_restaurante",
+        "nome_proprietario",
+      ]);
       const configAtualizado = await OutrasConfigRepository.updateOutrasConfig(
         restaurante_id,
         outrasConfig

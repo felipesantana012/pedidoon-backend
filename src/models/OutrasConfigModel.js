@@ -4,12 +4,6 @@ import sequelize from "../database/sequelize.js";
 const OutrasConfig = sequelize.define(
   "OutrasConfig",
   {
-    id: {
-      type: DataTypes.INTEGER,
-      primaryKey: true,
-      allowNull: false,
-      autoIncrement: true,
-    },
     restaurante_id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
@@ -24,6 +18,16 @@ const OutrasConfig = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
       defaultValue: "sua-imagem-logo.png",
+    },
+    nome_restaurante: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      defaultValue: "Nome-do-restaurante",
+    },
+    nome_proprietario: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      defaultValue: "Nome-do-Proprietario",
     },
   },
   {

@@ -31,12 +31,7 @@ class RestauranteService {
       if (!restauranteData) {
         throw new Error(gerarMenssagemError("REQUEST_BODY_INVALID"));
       }
-      validarCampos(restauranteData, [
-        "email",
-        "senha",
-        "nome_restaurante",
-        "nome_proprietario",
-      ]);
+      validarCampos(restauranteData, ["email", "senha"]);
 
       if (restauranteData.senha.length < 4) {
         throw new Error(gerarMenssagemError("PASSWORD_TOO_SHORT"));
