@@ -1,5 +1,7 @@
 import RestauranteRepository from "../repositories/RestauranteRepository.js";
 import { gerarMenssagemError, validarCampos } from "../utils/ErrorUtil.js";
+import fs from "fs/promises";
+import path from "path";
 import bcrypt from "bcryptjs";
 
 class RestauranteService {
@@ -59,7 +61,16 @@ class RestauranteService {
       if (!id || isNaN(id)) {
         throw new Error(gerarMenssagemError("INVALID_ID"));
       }
+      const pastaRestaurante = path.join(
+        process.cwd(),
+        "src/uploads",
+        `restaurante_${id}`
+      );
 
+      await fs.rm(pastaRestaurante, { recursive: true, force: true });
+      console.log(
+        `Pasta de imagens do restaurante ${id} foi removida com sucesso.`
+      );
       const deletedCount = await RestauranteRepository.delete(id);
       if (deletedCount === 0) {
         throw new Error(gerarMenssagemError("NOT_FOUND"));
