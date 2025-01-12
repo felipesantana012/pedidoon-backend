@@ -18,11 +18,9 @@ const AuthController = {
       }
 
       // Gerar o token
-      const token = jwt.sign(
-        { id: restaurante.id }, // Payload com o ID do restaurante
-        process.env.JWT_SECRET, // Chave secreta armazenada nas variáveis de ambiente
-        { expiresIn: "24h" } // Token válido por 24 horas
-      );
+      const token = jwt.sign({ id: restaurante.id }, process.env.JWT_SECRET, {
+        expiresIn: "24h",
+      });
 
       res.status(200).json({ token });
     } catch (error) {

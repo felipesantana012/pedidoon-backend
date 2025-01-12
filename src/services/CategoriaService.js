@@ -102,6 +102,10 @@ class CategoriaService {
         restaurante_id
       );
 
+      if (categoriaExistente.itens.length > 0) {
+        throw new Error(gerarMenssagemError("CATEGORIA_HAS_ITEM"));
+      }
+
       if (!categoriaExistente) {
         throw new Error(gerarMenssagemError("NOT_FOUND"));
       }
