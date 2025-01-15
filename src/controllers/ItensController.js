@@ -18,10 +18,21 @@ class ItensController {
     }
   }
 
-  async getAllItensDisponiveis(req, res) {
+  async getAllItensDisponiveisCategorias(req, res) {
     try {
-      const itens = await ItensService.getAllItensDisponiveis(
+      const itens = await ItensService.getAllItensDisponiveisCategorias(
         req.params.categoria_id,
+        req.restaurante_id
+      );
+      return res.status(200).json(itens);
+    } catch (error) {
+      return res.status(statusError(error)).json({ error: error.message });
+    }
+  }
+
+  async getAllItensDisponiveisRestaurante(req, res) {
+    try {
+      const itens = await ItensService.getAllItensDisponiveisRestaurante(
         req.restaurante_id
       );
       return res.status(200).json(itens);

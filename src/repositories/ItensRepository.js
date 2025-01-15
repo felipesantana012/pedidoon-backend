@@ -7,9 +7,15 @@ class ItensRepository {
     });
   }
 
-  async findAllItensDisponiveis(categoria_id, restaurante_id) {
+  async findAllItensDisponiveisCategorias(categoria_id, restaurante_id) {
     return await Itens.findAll({
       where: { categoria_id, restaurante_id, disponivel: true },
+    });
+  }
+
+  async findAllItensDisponiveisRestaurante(restaurante_id) {
+    return await Itens.findAll({
+      where: { restaurante_id, disponivel: true },
     });
   }
 

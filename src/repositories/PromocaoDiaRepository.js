@@ -14,7 +14,9 @@ class PromocaoDiaRepository {
   }
 
   async setPromocaoDia(restaurante_id, item_id) {
-    await removePromocaoDia(restaurante_id);
+    await PromocaoDia.destroy({
+      where: { restaurante_id },
+    });
     return await PromocaoDia.create({
       restaurante_id,
       item_id,
