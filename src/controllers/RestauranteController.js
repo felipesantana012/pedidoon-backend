@@ -43,6 +43,16 @@ class RestauranteController {
     }
   }
 
+  async getRestauranteEmail(req, res) {
+    const id = req.restaurante_id;
+    try {
+      const restaurante = await RestauranteService.getRestauranteEmail(id);
+      res.status(200).json(restaurante);
+    } catch (error) {
+      res.status(statusError(error)).json({ error: error.message });
+    }
+  }
+
   async updateRestauranteLogin(req, res) {
     const id = req.restaurante_id;
     const login = req.body;
