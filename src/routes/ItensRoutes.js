@@ -4,10 +4,14 @@ import upload from "../middleware/uploadMiddleware.js";
 const routes = new Router();
 
 routes.get("/itens", ItensController.getAllItensAllRestaurante);
+routes.get(
+  "/itens_disponiveis",
+  ItensController.getAllItensDisponiveisRestaurante
+);
 routes.get("/categorias/:categoria_id/itens", ItensController.getAllItens);
 routes.get(
   "/categorias/:categoria_id/itens/disponiveis",
-  ItensController.getAllItensDisponiveis
+  ItensController.getAllItensDisponiveisCategorias
 );
 
 routes.get("/categorias/:categoria_id/itens/:id", ItensController.getByIdItem);

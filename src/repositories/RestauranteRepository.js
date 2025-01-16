@@ -78,6 +78,12 @@ class RestauranteRepository {
     return deleted;
   }
 
+  async getRestauranteEmail(id) {
+    return await RestauranteModel.findByPk(id, {
+      attributes: ["email"],
+    });
+  }
+
   async updateRestauranteLogin(id, login) {
     if (login) {
       const [updated] = await RestauranteModel.update(login, {

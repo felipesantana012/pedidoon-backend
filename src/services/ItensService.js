@@ -22,12 +22,28 @@ class ItensService {
     }
   }
 
-  async getAllItensDisponiveis(categoria_id, restaurante_id) {
+  async getAllItensDisponiveisCategorias(categoria_id, restaurante_id) {
     try {
       await CategoriaService.getByIdCategoria(categoria_id, restaurante_id);
 
-      const itens = await ItensRepository.findAllItensDisponiveis(
+      const itens = await ItensRepository.findAllItensDisponiveisCategorias(
         categoria_id,
+        restaurante_id
+      );
+
+      if (!itens) {
+        throw new Error(gerarMenssagemError("NOT_FOUND"));
+      }
+
+      return itens;
+    } catch (error) {
+      throw new Error(gerarMenssagemError("DEFAULT", error.message));
+    }
+  }
+
+  async getAllItensDisponiveisRestaurante(restaurante_id) {
+    try {
+      const itens = await ItensRepository.findAllItensDisponiveisRestaurante(
         restaurante_id
       );
 

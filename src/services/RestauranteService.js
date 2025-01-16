@@ -82,6 +82,21 @@ class RestauranteService {
     }
   }
 
+  async getRestauranteEmail(id) {
+    try {
+      if (!id || isNaN(id)) {
+        throw new Error(gerarMenssagemError("INVALID_ID"));
+      }
+      const login = await RestauranteRepository.getRestauranteEmail(id);
+      if (!login) {
+        throw new Error(gerarMenssagemError("NOT_FOUND"));
+      }
+      return login;
+    } catch (error) {
+      throw new Error(gerarMenssagemError("DEFAULT", error.message));
+    }
+  }
+
   async updateRestauranteLogin(id, loginData) {
     try {
       if (!loginData) {

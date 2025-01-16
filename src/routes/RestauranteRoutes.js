@@ -4,6 +4,8 @@ import authMiddleware from "../middleware/authMiddleware.js";
 
 const routes = new Router();
 
+routes.get("/login", authMiddleware, RestauranteController.getRestauranteEmail);
+
 routes.put(
   "/login",
   authMiddleware,
