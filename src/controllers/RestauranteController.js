@@ -53,18 +53,30 @@ class RestauranteController {
     }
   }
 
-  async updateRestauranteLogin(req, res) {
+  async updateRestauranteEmail(req, res) {
     const id = req.restaurante_id;
-    const login = req.body;
+    const email = req.body;
 
     try {
       const restauranteAtualizado =
-        await RestauranteService.updateRestauranteLogin(id, login);
+        await RestauranteService.updateRestauranteEmail(id, email);
 
       res.status(200).json({
-        message: "Login atualizado com sucesso.",
+        message: "Email atualizado com sucesso.",
         data: restauranteAtualizado,
       });
+    } catch (error) {
+      res.status(statusError(error)).json({ error: error.message });
+    }
+  }
+
+  async updateRestauranteSenha(req, res) {
+    const id = req.restaurante_id;
+    const senha = req.body;
+
+    try {
+      await RestauranteService.updateRestauranteSenha(id, senha);
+      res.status(200).json({ message: "Senha atualizada com sucesso." });
     } catch (error) {
       res.status(statusError(error)).json({ error: error.message });
     }

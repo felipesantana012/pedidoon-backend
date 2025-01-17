@@ -40,7 +40,7 @@ class RedeSocialService {
         redesocial
       );
       if (!redeSocial) {
-        throw new Error(gerarMenssagemError("NOT_FOUND"));
+        throw new Error(gerarMenssagemError("UPDATE_FAILED"));
       }
 
       return redeSocial;

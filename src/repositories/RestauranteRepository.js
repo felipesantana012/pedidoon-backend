@@ -84,20 +84,38 @@ class RestauranteRepository {
     });
   }
 
-  async updateRestauranteLogin(id, login) {
-    if (login) {
-      const [updated] = await RestauranteModel.update(login, {
+  async updateRestauranteEmail(id, email) {
+    if (email) {
+      const [updated] = await RestauranteModel.update(email, {
         where: { id },
       });
 
       if (updated > 0) {
         const restuarante = await RestauranteModel.findByPk(id);
-        const loginAtualizado = {
+        const emailAtualizado = {
           id: restuarante.id,
           email: restuarante.email,
+        };
+        return emailAtualizado;
+      }
+    }
+
+    return null;
+  }
+
+  async updateRestauranteSenha(id, senha) {
+    if (senha) {
+      const [updated] = await RestauranteModel.update(senha, {
+        where: { id },
+      });
+
+      if (updated > 0) {
+        const restuarante = await RestauranteModel.findByPk(id);
+        const senhaAtualizada = {
+          id: restuarante.id,
           senha: restuarante.senha,
         };
-        return loginAtualizado;
+        return senhaAtualizada;
       }
     }
 
