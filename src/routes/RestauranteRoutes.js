@@ -4,12 +4,18 @@ import authMiddleware from "../middleware/authMiddleware.js";
 
 const routes = new Router();
 
-routes.get("/login", authMiddleware, RestauranteController.getRestauranteEmail);
+routes.get("/email", authMiddleware, RestauranteController.getRestauranteEmail);
 
 routes.put(
-  "/login",
+  "/email",
   authMiddleware,
-  RestauranteController.updateRestauranteLogin
+  RestauranteController.updateRestauranteEmail
+);
+
+routes.put(
+  "/senha",
+  authMiddleware,
+  RestauranteController.updateRestauranteSenha
 );
 
 routes.get("/", RestauranteController.getAllRestaurantes);
