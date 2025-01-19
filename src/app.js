@@ -6,14 +6,18 @@ import bodyParser from "body-parser";
 import path from "path";
 
 const app = express();
+app.use(express.json());
 
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: "*",
+    methods: ["GET", "POST", "PUT", "DELETE"],
   })
 );
-app.use(bodyParser.json());
 
+app.get("/", (req, res) => {
+  res.send("API funcionando!");
+});
 app.use("/uploads", express.static(path.join(process.cwd(), "src/uploads")));
 app.use("/api", routes);
 export default app;
