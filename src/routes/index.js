@@ -8,11 +8,13 @@ import OutrasConfigRoutes from "./OutrasConfigRoutes.js";
 import CategoriaRoutes from "./CategoriaRoutes.js";
 import ItensRoutes from "./ItensRoutes.js";
 import PromocaoDiaRoutes from "./PromocaoDiaRoutes.js";
+import DadosRestauranteClienteRoutes from "./DadosRestauranteClienteRoutes.js";
 
 const routes = new Router();
 
 routes.use("/auth", AuthRoutes);
 routes.use("/restaurantes", RestauranteRoutes);
+routes.use("/dados_restaurante_cliente", DadosRestauranteClienteRoutes);
 
 routes.use(authMiddleware);
 routes.use("/endereco", EnderecoRoutes);

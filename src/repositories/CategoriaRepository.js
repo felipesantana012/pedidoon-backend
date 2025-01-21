@@ -13,6 +13,21 @@ class CategoriaRepository {
     });
   }
 
+  async findAllCategoriasItensDisponiveis(restaurante_id) {
+    return await Categoria.findAll({
+      where: { restaurante_id },
+      include: [
+        {
+          model: Itens,
+          as: "itens",
+          where: {
+            disponivel: true,
+          },
+        },
+      ],
+    });
+  }
+
   async findByIdCategoria(id, restaurante_id) {
     return await Categoria.findOne({
       where: {
