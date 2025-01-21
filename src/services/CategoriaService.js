@@ -15,6 +15,19 @@ class CategoriaService {
     }
   }
 
+  async getAllCategoriasItensDisponiveis(restaurante_id) {
+    try {
+      await RestauranteService.getRestauranteById(restaurante_id);
+      const categorias =
+        await CategoriaRepository.findAllCategoriasItensDisponiveis(
+          restaurante_id
+        );
+      return categorias;
+    } catch (error) {
+      throw new Error(gerarMenssagemError("DEFAULT", error.message));
+    }
+  }
+
   async getByIdCategoria(id, restaurante_id) {
     try {
       if (!id || isNaN(id) || !restaurante_id || isNaN(restaurante_id)) {
