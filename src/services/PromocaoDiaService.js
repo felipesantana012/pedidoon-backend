@@ -35,13 +35,9 @@ class PromocaoDiaService {
       const promocao = await PromocaoDiaRepository.findPromocaoDia(
         restaurante_id
       );
+
       if (!promocao) {
-        throw new Error(
-          gerarMenssagemError(
-            "NOT_FOUND",
-            "Nenhuma promoção do dia encontrada."
-          )
-        );
+        return null;
       }
       return promocao;
     } catch (error) {
