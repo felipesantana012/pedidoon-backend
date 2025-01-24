@@ -17,22 +17,22 @@ const RedeSocial = sequelize.define(
     facebook: {
       type: DataTypes.STRING,
       allowNull: false,
-      defaultValue: "https://www.facebook.com",
+      defaultValue: "nome_usuario_no_facebook",
     },
     whatsapp: {
       type: DataTypes.STRING,
       allowNull: false,
-      defaultValue: "81 9 8888-8888",
+      defaultValue: "5581988888888",
     },
     tiktok: {
       type: DataTypes.STRING,
       allowNull: false,
-      defaultValue: "https://www.tiktok.com",
+      defaultValue: "nome_usuario_no_tiktok",
     },
     instagram: {
       type: DataTypes.STRING,
       allowNull: false,
-      defaultValue: "https://www.instagram.com",
+      defaultValue: "nome_usuario_no_instagram",
     },
   },
   {
