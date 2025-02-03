@@ -9,6 +9,7 @@ import CategoriaRoutes from "./CategoriaRoutes.js";
 import ItensRoutes from "./ItensRoutes.js";
 import PromocaoDiaRoutes from "./PromocaoDiaRoutes.js";
 import DadosRestauranteClienteRoutes from "./DadosRestauranteClienteRoutes.js";
+import BairrosEntregaRoutes from "./BairrosEntregaRoutes.js";
 
 const routes = new Router();
 
@@ -23,5 +24,6 @@ routes.use("/outras_config", OutrasConfigRoutes);
 routes.use("/categorias", CategoriaRoutes);
 routes.use("/", ItensRoutes);
 routes.use("/promocao_dia", PromocaoDiaRoutes);
+routes.use("/bairros_entrega", BairrosEntregaRoutes);
 
 export default routes;

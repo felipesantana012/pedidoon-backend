@@ -1,3 +1,4 @@
+import BairrosEntrega from "./models/BairrosEntregaModel.js";
 import Categoria from "./models/CategoriaModel.js";
 import Endereco from "./models/EnderecoModel.js";
 import Itens from "./models/ItensModel.js";
@@ -42,6 +43,15 @@ const defineAssociations = () => {
     onUpdate: "CASCADE",
   });
   Categoria.belongsTo(Restaurante, { foreignKey: "restaurante_id" });
+
+  // Restaurante e Bairros
+  Restaurante.hasMany(BairrosEntrega, {
+    foreignKey: "restaurante_id",
+    as: "bairros_entrega",
+    onDelete: "CASCADE",
+    onUpdate: "CASCADE",
+  });
+  BairrosEntrega.belongsTo(Restaurante, { foreignKey: "restaurante_id" });
 
   // Categoria e Itens
   Categoria.hasMany(Itens, {

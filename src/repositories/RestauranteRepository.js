@@ -1,3 +1,4 @@
+import BairrosEntrega from "../models/BairrosEntregaModel.js";
 import Categoria from "../models/CategoriaModel.js";
 import Endereco from "../models/EnderecoModel.js";
 import OutrasConfig from "../models/OutrasConfigModel.js";
@@ -25,6 +26,7 @@ class RestauranteRepository {
           as: "categorias",
         },
         { model: OutrasConfig, as: "outras_config" },
+        { model: BairrosEntrega, as: "bairros_entrega" },
       ],
     });
   }
@@ -49,6 +51,7 @@ class RestauranteRepository {
           as: "categorias",
         },
         { model: OutrasConfig, as: "outras_config" },
+        { model: BairrosEntrega, as: "bairros_entrega" },
       ],
     });
 
@@ -67,6 +70,7 @@ class RestauranteRepository {
           as: "categorias",
         },
         { model: OutrasConfig, as: "outras_config" },
+        { model: BairrosEntrega, as: "bairros_entrega" },
       ],
     });
   }
