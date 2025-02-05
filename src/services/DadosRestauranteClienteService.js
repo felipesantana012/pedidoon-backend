@@ -7,9 +7,12 @@ import { gerarMenssagemError } from "../utils/ErrorUtil.js";
 import BairrosEntregaService from "./BairrosEntregaService.js";
 
 class DadosRestauranteClienteService {
-  async getDadosRestauranteCliente(restaurante_id) {
-    const dados = {};
+  async getDadosRestauranteCliente(url) {
     try {
+      const restaurante_id = await OutrasConfigService.getRestauranteIdByUrl(
+        url
+      );
+      const dados = {};
       const categorias =
         await CategoriaService.getAllCategoriasItensDisponiveis(restaurante_id);
       const endereco = await EnderecoService.getEndereco(restaurante_id);
@@ -36,13 +39,7 @@ class DadosRestauranteClienteService {
 
       return dados;
     } catch (error) {
-      console.error(error);
-      throw new Error(
-        gerarMenssagemError(
-          "DEFAULT",
-          "Error ao buscar dados do Restaurante: " + error.message
-        )
-      );
+      throw new Error(error.message);
     }
   }
 }

@@ -4,7 +4,7 @@ import DadosRestauranteClienteController from "../controllers/DadosRestauranteCl
 const routes = new Router();
 
 routes.get(
-  "/:restaurante_id",
+  "/:url",
   DadosRestauranteClienteController.getDadosRestauranteCliente
 );
 
