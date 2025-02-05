@@ -1,5 +1,5 @@
 import { statusError } from "../utils/ErrorUtil.js";
-import PagamentoService from "../services/PagamanetoService.js";
+import PagamentoService from "../services/PagamentoService.js";
 
 class PagamentoController {
   async getAllPagamentos(req, res) {
