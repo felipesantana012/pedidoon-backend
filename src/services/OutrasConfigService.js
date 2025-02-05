@@ -61,6 +61,11 @@ class OutrasConfigService {
         "url",
       ]);
 
+      const regex = /^[a-zA-Z_-]+$/;
+      if (!regex.test(outrasConfig.url)) {
+        throw new Error(gerarMenssagemError("INVALID_URL"));
+      }
+
       const urlExistente = await OutrasConfigRepository.findByUrl(
         outrasConfig.url
       );

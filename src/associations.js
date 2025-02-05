@@ -3,6 +3,7 @@ import Categoria from "./models/CategoriaModel.js";
 import Endereco from "./models/EnderecoModel.js";
 import Itens from "./models/ItensModel.js";
 import OutrasConfig from "./models/OutrasConfigModel.js";
+import Pagamento from "./models/PagamentoModel.js";
 import PromocaoDia from "./models/PromocaoDiaModel.js";
 import RedeSocial from "./models/RedeSocial.js";
 import Restaurante from "./models/RestauranteModel.js";
@@ -34,6 +35,15 @@ const defineAssociations = () => {
     onUpdate: "CASCADE",
   });
   RedeSocial.belongsTo(Restaurante, { foreignKey: "restaurante_id" });
+
+  //Restaurante e Pagamento
+  Restaurante.hasMany(Pagamento, {
+    foreignKey: "restaurante_id",
+    as: "pagamentos",
+    onDelete: "CASCADE",
+    onUpdate: "CASCADE",
+  });
+  Pagamento.belongsTo(Restaurante, { foreignKey: "restaurante_id" });
 
   // Restaurante e Categoria
   Restaurante.hasMany(Categoria, {

@@ -10,6 +10,7 @@ import ItensRoutes from "./ItensRoutes.js";
 import PromocaoDiaRoutes from "./PromocaoDiaRoutes.js";
 import DadosRestauranteClienteRoutes from "./DadosRestauranteClienteRoutes.js";
 import BairrosEntregaRoutes from "./BairrosEntregaRoutes.js";
+import PagamentoRoutes from "./PagamentoRoutes.js";
 
 const routes = new Router();
 
@@ -21,6 +22,7 @@ routes.use(authMiddleware);
 routes.use("/endereco", EnderecoRoutes);
 routes.use("/rede_sociais", RedeSocialRoutes);
 routes.use("/outras_config", OutrasConfigRoutes);
+routes.use("/pagamento", PagamentoRoutes);
 routes.use("/categorias", CategoriaRoutes);
 routes.use("/", ItensRoutes);
 routes.use("/promocao_dia", PromocaoDiaRoutes);

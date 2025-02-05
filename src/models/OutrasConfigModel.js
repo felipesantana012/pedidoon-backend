@@ -33,6 +33,12 @@ const OutrasConfig = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
       unique: true,
+      validate: {
+        is: {
+          args: /^[a-zA-Z_-]+$/,
+          msg: "A URL só pode conter letras, (_) e (-).",
+        },
+      },
     },
   },
   {

@@ -2,6 +2,7 @@ import BairrosEntrega from "../models/BairrosEntregaModel.js";
 import Categoria from "../models/CategoriaModel.js";
 import Endereco from "../models/EnderecoModel.js";
 import OutrasConfig from "../models/OutrasConfigModel.js";
+import Pagamento from "../models/PagamentoModel.js";
 import RedeSocial from "../models/RedeSocial.js";
 import RestauranteModel from "../models/RestauranteModel.js";
 
@@ -27,6 +28,7 @@ class RestauranteRepository {
         },
         { model: OutrasConfig, as: "outras_config" },
         { model: BairrosEntrega, as: "bairros_entrega" },
+        { model: Pagamento, as: "pagamentos" },
       ],
     });
   }
