@@ -7,6 +7,7 @@ const messages = {
   DUPLICATE_URL: "Url já existe, Tente outra url.",
   PASSWORD_TOO_SHORT: "A senha deve ter no mínimo 4 caracteres.",
   REQUEST_BODY_INVALID: "Corpo da requisição inválido.",
+  INVALID_URL: "A URL só pode conter letras, _ e -.",
   UPDATE_FAILED: "Falha ao atualizar, Registro não foi alterado.",
   CATEGORIA_HAS_ITEM: "Categoria possui itens cadastrados.",
   DEFAULT: "Erro ao processar a solicitação: => ",
@@ -39,7 +40,8 @@ export function statusError(error) {
     error.message.includes(messages.DUPLICATE_URL) ||
     error.message.includes(messages.REQUEST_BODY_INVALID) ||
     error.message.includes(messages.UPDATE_FAILED) ||
-    error.message.includes(messages.CATEGORIA_HAS_ITEM)
+    error.message.includes(messages.CATEGORIA_HAS_ITEM) ||
+    error.message.includes(messages.INVALID_URL)
   ) {
     return 400;
   } else {
