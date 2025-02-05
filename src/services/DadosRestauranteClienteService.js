@@ -3,8 +3,8 @@ import EnderecoService from "./EnderecoService.js";
 import OutrasConfigService from "./OutrasConfigService.js";
 import RedeSocialService from "./RedeSocialService.js";
 import PromocaoDiaService from "./PromocaoDiaService.js";
-import { gerarMenssagemError } from "../utils/ErrorUtil.js";
 import BairrosEntregaService from "./BairrosEntregaService.js";
+import PagamentoService from "./PagamentoService.js";
 
 class DadosRestauranteClienteService {
   async getDadosRestauranteCliente(url) {
@@ -30,12 +30,17 @@ class DadosRestauranteClienteService {
         restaurante_id
       );
 
+      const pagamento = await PagamentoService.getAllPagamentosAtivos(
+        restaurante_id
+      );
+
       dados.categorias = categorias;
       dados.endereco = endereco;
       dados.rede_sociais = rede_sociais;
       dados.outras_config = outrasConfig;
       dados.promocao_dia = promocao_dia;
       dados.bairros_entrega = bairros_entrega;
+      dados.pagamento = pagamento;
 
       return dados;
     } catch (error) {
