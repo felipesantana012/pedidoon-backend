@@ -38,7 +38,15 @@ class OutrasConfigService {
         "img_logo",
         "nome_restaurante",
         "nome_proprietario",
+        "url",
       ]);
+
+      const urlExistente = await OutrasConfigRepository.findByUrl(
+        outrasConfig.url
+      );
+      if (urlExistente && urlExistente.restaurante_id !== restaurante_id) {
+        throw new Error(gerarMenssagemError("DUPLICATE_URL"));
+      }
       const configAtualizado = await OutrasConfigRepository.updateOutrasConfig(
         restaurante_id,
         outrasConfig

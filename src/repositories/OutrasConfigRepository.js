@@ -9,6 +9,14 @@ class OutrasConfigRepository {
     });
   }
 
+  async findByUrl(url) {
+    return await OutrasConfig.findOne({
+      where: {
+        url: url,
+      },
+    });
+  }
+
   async updateOutrasConfig(restaurante_id, outrasConfig) {
     if (outrasConfig) {
       const [updated] = await OutrasConfig.update(outrasConfig, {
