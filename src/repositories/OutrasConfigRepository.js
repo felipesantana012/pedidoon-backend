@@ -9,6 +9,23 @@ class OutrasConfigRepository {
     });
   }
 
+  async findByUrl(url) {
+    return await OutrasConfig.findOne({
+      where: {
+        url: url,
+      },
+    });
+  }
+
+  async getRestauranteIdByUrl(url) {
+    const outrasConfig = await OutrasConfig.findOne({
+      where: { url: url },
+      attributes: ["restaurante_id"],
+    });
+
+    return outrasConfig ? outrasConfig.restaurante_id : null;
+  }
+
   async updateOutrasConfig(restaurante_id, outrasConfig) {
     if (outrasConfig) {
       const [updated] = await OutrasConfig.update(outrasConfig, {

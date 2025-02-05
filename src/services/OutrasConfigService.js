@@ -22,6 +22,26 @@ class OutrasConfigService {
     }
   }
 
+  async getRestauranteIdByUrl(url) {
+    try {
+      if (!url) {
+        throw new Error(gerarMenssagemError("REQUEST_BODY_INVALID"));
+      }
+
+      const restaurante_id = await OutrasConfigRepository.getRestauranteIdByUrl(
+        url
+      );
+
+      if (!restaurante_id) {
+        throw new Error(gerarMenssagemError("URL_NOT_FOUND"));
+      }
+
+      return restaurante_id;
+    } catch (error) {
+      throw new Error(gerarMenssagemError("DEFAULT", error.message));
+    }
+  }
+
   async updateOutrasConfig(restaurante_id, outrasConfig) {
     try {
       if (!outrasConfig) {
@@ -38,7 +58,15 @@ class OutrasConfigService {
         "img_logo",
         "nome_restaurante",
         "nome_proprietario",
+        "url",
       ]);
+
+      const urlExistente = await OutrasConfigRepository.findByUrl(
+        outrasConfig.url
+      );
+      if (urlExistente && urlExistente.restaurante_id !== restaurante_id) {
+        throw new Error(gerarMenssagemError("DUPLICATE_URL"));
+      }
       const configAtualizado = await OutrasConfigRepository.updateOutrasConfig(
         restaurante_id,
         outrasConfig

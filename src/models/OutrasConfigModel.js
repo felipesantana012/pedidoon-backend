@@ -29,10 +29,22 @@ const OutrasConfig = sequelize.define(
       allowNull: false,
       defaultValue: "Nome-do-Proprietario",
     },
+    url: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+    },
   },
   {
     tableName: "outras_config",
     timestamps: false,
+    hooks: {
+      beforeCreate: async (config) => {
+        if (!config.url) {
+          config.url = `url_${config.restaurante_id}`;
+        }
+      },
+    },
   }
 );
 
