@@ -1,5 +1,6 @@
 import { DataTypes } from "sequelize";
 import sequelize from "../database/sequelize.js";
+import { v4 as uuidv4 } from "uuid";
 
 const OutrasConfig = sequelize.define(
   "OutrasConfig",
@@ -33,10 +34,11 @@ const OutrasConfig = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
       unique: true,
+      defaultValue: () => uuidv4(),
       validate: {
         is: {
-          args: /^[a-zA-Z_-]+$/,
-          msg: "A URL só pode conter letras, (_) e (-).",
+          args: /^[a-zA-Z0-9_-]+$/,
+          msg: "A URL só pode conter letras, números, (_) e (-).",
         },
       },
     },
@@ -44,13 +46,6 @@ const OutrasConfig = sequelize.define(
   {
     tableName: "outras_config",
     timestamps: false,
-    hooks: {
-      beforeCreate: async (config) => {
-        if (!config.url) {
-          config.url = `url_${config.restaurante_id}`;
-        }
-      },
-    },
   }
 );
 
