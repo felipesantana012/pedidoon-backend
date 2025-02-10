@@ -17,8 +17,7 @@ Este projeto utiliza Node.js com o framework Express para gerenciar um sistema d
 2. Clone este repositório:
 
    ```bash
-   git clone https://github.com/felipesantana012/pedidoon-backend.git
-
+   git clone https://github.com/seuusuario/pedidoon-backend.git
    ```
 
 3. Acesse o diretório do projeto:
@@ -36,6 +35,7 @@ Este projeto utiliza Node.js com o framework Express para gerenciar um sistema d
 
 - **bcryptjs**: Para hashing de senhas.
 - **body-parser**: Para parsing de requisições HTTP.
+- **cors**: Para permitir requisições de diferentes origens.
 - **dotenv**: Para gerenciar variáveis de ambiente.
 - **express**: Framework web para construir a API.
 - **jsonwebtoken**: Para geração e validação de tokens JWT.
@@ -49,8 +49,9 @@ Este projeto utiliza Node.js com o framework Express para gerenciar um sistema d
 
 ## Scripts Disponíveis
 
-No arquivo `package.json`, há o seguinte script configurado:
+No arquivo `package.json`, há os seguintes scripts configurados:
 
+- **`npm run start`**: Inicia o servidor em produção.
 - **`npm run dev`**: Inicia o servidor em modo de desenvolvimento usando o `nodemon`.
 
 ## Estrutura de Pastas
@@ -58,10 +59,15 @@ No arquivo `package.json`, há o seguinte script configurado:
 ```
 ├── src
 │   ├── controllers
-│   ├── middlewares
+│   ├── database
+│   ├── middleware
 │   ├── models
+│   ├── repositories
 │   ├── routes
+│   ├── services
+│   ├── utils
 │   ├── uploads
+│   ├── associations.js
 │   └── server.js
 ├── .env
 ├── package.json
@@ -70,13 +76,29 @@ No arquivo `package.json`, há o seguinte script configurado:
 
 - **`src`**: Contém todo o código-fonte do servidor.
   - **`controllers`**: Contém a lógica de negócios.
-  - **`middlewares`**: Contém middlewares personalizados.
+  - **`database`**: Configuração do banco de dados.
+  - **`middleware`**: Contém middlewares personalizados.
   - **`models`**: Contém os modelos Sequelize para o banco de dados.
+  - **`repositories`**: Contém funções de acesso ao banco de dados.
   - **`routes`**: Define as rotas da aplicação.
+  - **`services`**: Contém regras de negócio reutilizáveis.
+  - **`utils`**: Funções auxiliares utilizadas no projeto.
   - **`uploads`**: Diretório para armazenar arquivos enviados.
+  - **`associations.js`**: Define as associações entre os modelos Sequelize.
 - **`.env`**: Arquivo para variáveis de ambiente.
 - **`package.json`**: Gerencia dependências e scripts do projeto.
 - **`README.md`**: Documentação do projeto.
+
+## Dotenv
+
+- HOST = "142.93.205.131"
+- PORT_MYSQL = "3306"
+- USER = "admin"
+- PASSWORD = `pedidoon*12`
+- DATABASE = "db_pedidoon"
+
+- PORT_SERVER = 3001
+- JWT_SECRET = "thiagomatteo"
 
 ## Uso
 
@@ -86,4 +108,6 @@ No arquivo `package.json`, há o seguinte script configurado:
    ```
 2. O servidor será iniciado e estará disponível em `http://localhost:3000/api`.
 
-Agora você está pronto para explorar e desenvolver o sistema **Pedidooon**! Caso tenha dúvidas ou precise de mais ajuda, entre em contato com o autor.
+3. O back-end ja esta disponivel na web :
+
+- [pedidoonbackend.felipedev.app.br](https://pedidoonbackend.felipedev.app.br/)
