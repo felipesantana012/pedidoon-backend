@@ -91,14 +91,14 @@ No arquivo `package.json`, há os seguintes scripts configurados:
 
 ## Dotenv
 
-- HOST = "142.93.205.131"
-- PORT_MYSQL = "3306"
-- USER = "admin"
-- PASSWORD = `pedidoon*12`
-- DATABASE = "db_pedidoon"
+- HOST = ""
+- PORT_MYSQL = ""
+- USER = ""
+- PASSWORD = ""
+- DATABASE = ""
 
-- PORT_SERVER = 3001
-- JWT_SECRET = "thiagomatteo"
+- PORT_SERVER = ""
+- JWT_SECRET = ""
 
 ## Uso
 
@@ -111,3 +111,8 @@ No arquivo `package.json`, há os seguintes scripts configurados:
 3. O back-end ja esta disponivel na web :
 
 - [pedidoonbackend.felipedev.app.br](https://pedidoonbackend.felipedev.app.br/)
+
+## Acesso
+
+- email: felipe@gmail.com
+- senha: 1234
